@@ -3,7 +3,7 @@
 
 int main()
 {
-    std::cout << "Hello World!\n"; 
+    std::cout << "Hello World!" << std::endl;
 }
 
 // Executar programa: Ctrl + F5 ou Menu Depurar > Iniciar Sem Depuração
