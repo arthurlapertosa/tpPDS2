@@ -34,3 +34,4 @@
 # Pasta
 Debug/
 .vs/
+*.suo
