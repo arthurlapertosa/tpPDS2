@@ -34,5 +34,6 @@
 # Pasta
 Debug/
 .vs/
+TP-PDS2/
 *.suo
 *.db
