@@ -35,5 +35,7 @@
 Debug/
 .vs/
 TP-PDS2/
+v16/
+.suo
 *.suo
 *.db
