@@ -6,7 +6,9 @@
 #include <algorithm>
 #include <iostream>
 
+
 using namespace std;
+
 
 LeituraArquivos::LeituraArquivos() {
 	for (int i = 1; 1; i++) {
@@ -23,6 +25,15 @@ LeituraArquivos::LeituraArquivos() {
 		while (!words.eof()) { //Lê todo o arquivo
 			words >> a; //atribui a palavra a variável "a"
 			transform(a.begin(), a.end(), a.begin(), ::tolower); //Coloca todas as letras para minúsculo
+			for (int i = 0; i < a.size(); i++) { //verifica cada caracter da palavra
+				if (!(a[i] >= 'a' && a[i] <= 'z' || a[i] == 'ç')) { //verifica quais sao especiais
+					for (int j = i; j < a.size() - 1; j++) {
+						a[j] = a[j++]; //substitui pelo caracter seguinte
+					}
+					a[a.size() - 1] = '/0'; //elimina o ultimo
+				}
+			}
+
 			set<string> docs = { "d" + to_string(i) + ".txt" }; //Cria uma set com o primeiro elemento com o nome do documento
 			ret = my_map.insert(pair <string, set<string>>(a, docs)); //Insere o elemento no dicionário, sendo o índice a palavra. Se a palavra já existir, retorna false para o iterator ret, e o índice não é criado
 			if (!ret.second) { //Se não existir o elemento já no mapa
