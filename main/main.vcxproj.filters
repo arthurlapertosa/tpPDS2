@@ -21,6 +21,9 @@
     <ClCompile Include="LeituraArquivos.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
+    <ClCompile Include="indice_invertido.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="d1.txt">
@@ -32,9 +35,15 @@
     <Text Include="d3.txt">
       <Filter>Arquivos de Recurso</Filter>
     </Text>
+    <Text Include="d4.txt">
+      <Filter>Arquivos de Recurso</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LeituraArquivos.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="indice_invertido.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
   </ItemGroup>

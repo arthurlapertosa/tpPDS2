@@ -4,29 +4,41 @@
 #include <map>
 #include <fstream>
 #include <string>
+#include "indice_invertido.h"
 
 using namespace std;
 
-//Não soube como chamar a classe: se leitura de arquivos ou indice invertido
 
 class LeituraArquivos {
 private:
-	//Cria o mapa de string para uma lista de string que contém os documentos (Indice invertido)
-	map<string, set<string>> my_map; 
 
-	//Cria o documento
-	ifstream words;
+	//numero total de documentos na colecao
+	int numero_doc_;
 
-	//Cria a variável tipo bool que testa se o elemento já está no mapa
-	pair<std::map<string, set<string>>::iterator, bool> ret;
+	//O indice invertido do documento
+	indice_invertido indice_;
+
+	//Verifica se tem algum caracter especial e substitui
+	string verifica(string a);
+
+	//Coloca todos em minusculo
+	string minusculo(string a);
 
 public:
-	//Lê os arquivos e coloca eles no indice invertido
+	//Inicializa a classe
 	LeituraArquivos();
+
+	//Lê os arquivos e coloca eles no indice invertido
+	void ler();
 
 	//Imprime o indice invertido
 	void imprimirIndice();
+	
+	//retorna o indice invertido
+	indice_invertido indiceInvertido();
 
+	//Retorna o numero total de elementos da coleção
+	int numeroDocs();
 };
 
 
