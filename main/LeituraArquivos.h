@@ -4,7 +4,10 @@
 #include <map>
 #include <fstream>
 #include <string>
+#include <algorithm>
+#include <iostream>
 #include "indice_invertido.h"
+#include "frequencia_palavra.h"
 
 using namespace std;
 
@@ -24,6 +27,9 @@ private:
 	//Coloca todos em minusculo
 	string minusculo(string a);
 
+	//A frequencia de cada palavra no documento
+	frequencia_palavra frequencia_;
+
 public:
 	//Inicializa a classe
 	LeituraArquivos();
@@ -33,6 +39,9 @@ public:
 
 	//Imprime o indice invertido
 	void imprimirIndice();
+
+	//Imprime a frequencia das palavras
+	void imprimirFrequenciaPalavras();
 	
 	//retorna o indice invertido
 	indice_invertido indiceInvertido();

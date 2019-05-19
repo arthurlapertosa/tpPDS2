@@ -1,11 +1,4 @@
 #include "LeituraArquivos.h"
-#include <set>
-#include <map>
-#include <fstream>
-#include <string>
-#include <algorithm>
-#include <iostream>
-
 
 using namespace std;
 
@@ -36,6 +29,7 @@ void LeituraArquivos::ler() {
 			a = minusculo(a);
 			a = verifica(a);
 			indice_.inserir(a, "d" + to_string(i) + ".txt"); //Adiciona a palavra ao indice invertido
+			frequencia_.inserir(a, "d" + to_string(i) + ".txt");
 		}
 		words.close();
 	}
@@ -43,6 +37,10 @@ void LeituraArquivos::ler() {
 
 void LeituraArquivos::imprimirIndice(){
 	indice_.imprimirIndice();
+}
+
+void LeituraArquivos::imprimirFrequenciaPalavras() {
+	frequencia_.imprimir();
 }
 
 string LeituraArquivos::verifica(string a) {
