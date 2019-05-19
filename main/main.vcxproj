@@ -151,11 +151,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="frequencia_palavra.cpp" />
     <ClCompile Include="indice_invertido.cpp" />
     <ClCompile Include="LeituraArquivos.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="frequencia_palavra.h" />
     <ClInclude Include="indice_invertido.h" />
     <ClInclude Include="LeituraArquivos.h" />
   </ItemGroup>
