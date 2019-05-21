@@ -9,7 +9,8 @@ frequencia_palavra::frequencia_palavra()
 
 void frequencia_palavra::inserir(string palavra, string documento) {
 	map<string, map<string, int>>::iterator it = a.find(palavra);
-	
+
+	frequencia_total(palavra);
 
 	if (it != a.end()) { // Elemento foi achado
 		map<string, int>::iterator it2 = a[palavra].find(documento);
@@ -36,6 +37,10 @@ void frequencia_palavra::imprimir() {
 		}
 			cout << endl;
 	}
+}
+
+void frequencia_palavra::frequencia_total(string palavra) {
+
 }
 
 frequencia_palavra::~frequencia_palavra()

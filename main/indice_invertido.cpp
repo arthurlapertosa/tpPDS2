@@ -4,7 +4,7 @@ indice_invertido::indice_invertido() {}
 
 void indice_invertido::inserir(string a, string documento) {
 	set<string> docs = { documento }; //Cria uma set com o primeiro elemento com o nome do documento
-	pair<std::map<string, set<string>>::iterator, bool> ret; //Cria a variável tipo bool que testa se o elemento já está no mapa
+	pair<map<string, set<string>>::iterator, bool> ret; //Cria a variável tipo bool que testa se o elemento já está no mapa
 	ret = my_map_.insert(pair <string, set<string>>(a, docs)); //Insere o elemento no dicionário, sendo o índice a palavra. Se a palavra já existir, retorna false para o iterator ret, e o índice não é criado
 	if (!ret.second) { //Se não existir o elemento já no mapa
 		my_map_[a].insert(documento); //vai adicionando os nomes dos documentos

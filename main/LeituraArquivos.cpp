@@ -19,7 +19,7 @@ void LeituraArquivos::ler() {
 				break;
 			}
 		}
-		if (!words.is_open()) { //Se acabarem os documentos, ele sai do loop
+		else if (!words.is_open()) { //Se acabarem os documentos, ele sai do loop
 			numero_doc_ = i - 1;
 			break;
 		}
