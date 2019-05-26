@@ -8,6 +8,7 @@
 #include <iostream>
 #include "indice_invertido.h"
 #include "frequencia_palavra.h"
+#include "frequencia_invertida.h"
 
 using namespace std;
 
@@ -28,7 +29,10 @@ private:
 	string minusculo(string a);
 
 	//A frequencia de cada palavra no documento
-	frequencia_palavra frequencia_;
+	frequencia_palavra frequencia_;	
+	
+	//A frequencia invertida de cada palavra no documento
+	frequencia_invertida frequencia_invertida_;
 
 public:
 	//Inicializa a classe
@@ -42,12 +46,18 @@ public:
 
 	//Imprime a frequencia das palavras
 	void imprimirFrequenciaPalavras();
+
+	//Imprime a frequencia invertida das palavras
+	void imprimirFrequenciaInvertidaPalavras();
 	
 	//retorna o indice invertido
 	indice_invertido indiceInvertido();
 
 	//Retorna o numero total de elementos da coleção
 	int numeroDocs();
+
+	//Retorna o numero de documentos que a palavra aparece
+	int numero_Doc_Palavra(string palavra);
 };
 
 

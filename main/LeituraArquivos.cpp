@@ -33,6 +33,7 @@ void LeituraArquivos::ler() {
 		}
 		words.close();
 	}
+	frequencia_invertida_.inserir_frequencia_invertida(frequencia_.frequenciapalavra(), numero_doc_);
 }
 
 void LeituraArquivos::imprimirIndice(){
@@ -41,6 +42,11 @@ void LeituraArquivos::imprimirIndice(){
 
 void LeituraArquivos::imprimirFrequenciaPalavras() {
 	frequencia_.imprimir();
+}
+
+void LeituraArquivos::imprimirFrequenciaInvertidaPalavras()
+{
+	frequencia_invertida_.imprimi_Invertida();
 }
 
 string LeituraArquivos::verifica(string a) {
@@ -66,4 +72,9 @@ indice_invertido LeituraArquivos::indiceInvertido() {
 
 int LeituraArquivos::numeroDocs() {
 	return numero_doc_;
+}
+
+int LeituraArquivos::numero_Doc_Palavra(string palavra)
+{
+	return frequencia_.frequenciapalavra()[palavra].size();
 }
