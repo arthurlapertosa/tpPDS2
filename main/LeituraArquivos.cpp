@@ -19,7 +19,7 @@ void LeituraArquivos::ler() {
 				break;
 			}
 		}
-		if (!words.is_open()) { //Se acabarem os documentos, ele sai do loop
+		else if (!words.is_open()) { //Se acabarem os documentos, ele sai do loop
 			numero_doc_ = i - 1;
 			break;
 		}
@@ -33,6 +33,7 @@ void LeituraArquivos::ler() {
 		}
 		words.close();
 	}
+	frequencia_invertida_.inserir(frequencia_.frequenciaPalavra(), numero_doc_);
 }
 
 void LeituraArquivos::imprimirIndice(){
@@ -41,6 +42,21 @@ void LeituraArquivos::imprimirIndice(){
 
 void LeituraArquivos::imprimirFrequenciaPalavras() {
 	frequencia_.imprimir();
+}
+
+int LeituraArquivos::tf(string documento, string palavra)
+{
+	return frequencia_.frequenciaPalavraNoDocumento(documento, palavra);
+}
+
+void LeituraArquivos::imprimirFrequenciaInvertidaPalavras()
+{
+	frequencia_invertida_.imprimi_Invertida();
+}
+
+double LeituraArquivos::idf(string palavra)
+{
+	return frequencia_invertida_.frequencia_invertida_palavra(palavra);
 }
 
 string LeituraArquivos::verifica(string a) {
@@ -66,4 +82,9 @@ indice_invertido LeituraArquivos::indiceInvertido() {
 
 int LeituraArquivos::numeroDocs() {
 	return numero_doc_;
+}
+
+int LeituraArquivos::numero_Doc_Palavra(string palavra)
+{
+	return frequencia_.frequenciaPalavra()[palavra].size();
 }

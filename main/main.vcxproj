@@ -155,8 +155,10 @@
     <ClCompile Include="indice_invertido.cpp" />
     <ClCompile Include="LeituraArquivos.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="frequencia_invertida.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="frequencia_invertida.h" />
     <ClInclude Include="frequencia_palavra.h" />
     <ClInclude Include="indice_invertido.h" />
     <ClInclude Include="LeituraArquivos.h" />
