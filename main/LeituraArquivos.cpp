@@ -44,9 +44,19 @@ void LeituraArquivos::imprimirFrequenciaPalavras() {
 	frequencia_.imprimir();
 }
 
+int LeituraArquivos::tf(string documento, string palavra)
+{
+	return frequencia_.frequenciaPalavraNoDocumento(documento, palavra);
+}
+
 void LeituraArquivos::imprimirFrequenciaInvertidaPalavras()
 {
 	frequencia_invertida_.imprimi_Invertida();
+}
+
+double LeituraArquivos::idf(string palavra)
+{
+	return frequencia_invertida_.frequencia_invertida_palavra(palavra);
 }
 
 string LeituraArquivos::verifica(string a) {

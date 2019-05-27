@@ -31,6 +31,9 @@ public:
 	//Retorna o map com os documentos que a palavra "palavra" aparece
 	map<string, int> frequenciaPalavra(string palavra);
 
+	//Numero de vezes que a palavra apareceu no documento
+	int frequenciaPalavraNoDocumento(string documento, string palavra);
+
 	~frequencia_palavra();
 };
 

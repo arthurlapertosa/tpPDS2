@@ -48,6 +48,11 @@ map<string, int> frequencia_palavra::frequenciaPalavra(string palavra)
 	return frequencia_palavra_[palavra];
 }
 
+int frequencia_palavra::frequenciaPalavraNoDocumento(string documento, string palavra)
+{
+	return frequencia_palavra_[palavra][documento];
+}
+
 frequencia_palavra::~frequencia_palavra()
 {
 }

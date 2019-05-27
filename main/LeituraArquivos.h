@@ -47,8 +47,14 @@ public:
 	//Imprime a frequencia das palavras
 	void imprimirFrequenciaPalavras();
 
+	//Numero de vezes que a palavra apareceu no documento (tf(documento, palavra))
+	int tf(string documento, string palavra);
+
 	//Imprime a frequencia invertida das palavras
 	void imprimirFrequenciaInvertidaPalavras();
+
+	//Retorna o idf(palavra)
+	double idf(string palavra);
 	
 	//retorna o indice invertido
 	indice_invertido indiceInvertido();
