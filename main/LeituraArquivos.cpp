@@ -33,7 +33,7 @@ void LeituraArquivos::ler() {
 		}
 		words.close();
 	}
-	frequencia_invertida_.inserir_frequencia_invertida(frequencia_.frequenciapalavra(), numero_doc_);
+	frequencia_invertida_.inserir(frequencia_.frequenciaPalavra(), numero_doc_);
 }
 
 void LeituraArquivos::imprimirIndice(){
@@ -76,5 +76,5 @@ int LeituraArquivos::numeroDocs() {
 
 int LeituraArquivos::numero_Doc_Palavra(string palavra)
 {
-	return frequencia_.frequenciapalavra()[palavra].size();
+	return frequencia_.frequenciaPalavra()[palavra].size();
 }

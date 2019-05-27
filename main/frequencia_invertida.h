@@ -2,7 +2,7 @@
 #define FREQUENCIA_INVERTIDA
 #include <map>
 #include <string>
-#include <math.h>
+#include <cmath>
 #include <iostream>
 
 using std::map;
@@ -22,8 +22,7 @@ public:
 	frequencia_invertida();
 
 	//Insere novas palavras na frequencia invertida
-	void inserir_frequencia_invertida(map<string, map<string, int>> frequencia_palavra_, int num_docs_total);
-
+	void inserir(map<string, map<string, int>> frequencia_palavra_, int num_docs_total);
 
 
 	//Imprime a frequencia invertida

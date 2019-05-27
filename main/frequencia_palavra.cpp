@@ -38,9 +38,14 @@ void frequencia_palavra::imprimir() {
 }
 
 
-map<string, map<string, int>> frequencia_palavra::frequenciapalavra()
+map<string, map<string, int>> frequencia_palavra::frequenciaPalavra()
 {
 	return frequencia_palavra_;
+}
+
+map<string, int> frequencia_palavra::frequenciaPalavra(string palavra)
+{
+	return frequencia_palavra_[palavra];
 }
 
 frequencia_palavra::~frequencia_palavra()
