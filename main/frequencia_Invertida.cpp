@@ -13,9 +13,9 @@ for (auto i = frequencia_palavra_.begin(); i != frequencia_palavra_.end(); i++) 
 
 		if (it != frequencia_invertida_palavra_.end()) {
 		}
-		else if (it == frequencia_invertida_palavra_.end()) { //Elemento não achado
+		else if (it == frequencia_invertida_palavra_.end()) { //Elemento nï¿½o achado
 			double frequencia_int;
-			frequencia_int = log2((num_docs_total / frequencia_palavra_[palavra].size()));
+			frequencia_int = log10((num_docs_total / frequencia_palavra_[palavra].size()));
 			frequencia_invertida_palavra_.insert(std::pair<string, double>(palavra, frequencia_int));//Adiciona o elemento ao mapa frequencia_total_palavra_
 		}
 	}
