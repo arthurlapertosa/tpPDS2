@@ -13,7 +13,6 @@ using std::endl;
 class frequencia_invertida
 {
 private:
-
 	//Frequencia invertida da palavra N na coleção
 	map<string, double> frequencia_invertida_palavra_;
 
@@ -23,7 +22,6 @@ public:
 
 	//Insere novas palavras na frequencia invertida
 	void inserir(map<string, map<string, int>> frequencia_palavra_, int num_docs_total);
-
 
 	//Imprime a frequencia invertida
 	void imprimi_Invertida();

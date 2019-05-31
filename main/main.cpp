@@ -15,4 +15,5 @@ int main(){
 	cout << endl << "O tf("<< documento << ", " << palavra << ") eh = "  << arquivos.tf(documento, palavra) << endl;
 	cout << endl << "O idf(" << palavra << ") eh = " << arquivos.idf(palavra) << endl;
 	arquivos.imprimirFrequenciaInvertidaPalavras();
+	
 }
