@@ -15,3 +15,35 @@ void wvector::exibir() {
 		cout << endl;
 	}
 }
+
+vector<string>wvector::vetorNaoRep(vector<string> palavra, string documento) {
+	vector<string> aux;
+	aux.clear();
+	string p;
+	auto i = palavra.begin();
+	for (i = palavra.begin(); i != palavra.end(); ++i) {
+		p = *i;
+		if (!existe(aux, p)) {
+			aux.insert(aux.begin(), p);
+		}
+	}
+	return aux;
+}
+
+bool wvector::existe(vector<string> x, string palavra) {
+	auto i = x.begin();
+	if (x.empty()) {
+		return false;
+	}
+	string p;
+	for (i = x.begin(); i != x.end(); ++i) {
+		p = *i;
+		if (p == palavra) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+}
+

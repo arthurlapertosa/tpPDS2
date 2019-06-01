@@ -11,7 +11,6 @@ LeituraArquivos::LeituraArquivos() {
 void LeituraArquivos::ler() {
 	//Cria o documento
 	ifstream words;
-	vector<string> palavras;
 	for (int i = 1; 1; i++) {
 		words.open("d" + to_string(i) + ".txt"); //vai lendo cada um dos documentos : d1.txt, d2.txt, ... , dn.txt
 		if (i == 1) {
@@ -26,7 +25,6 @@ void LeituraArquivos::ler() {
 			break;
 		}
 		string a;
-		palavras.clear();
 		while (!words.eof()) { //Lê todo o arquivo
 			words >> a; //atribui a palavra a variável "a"
 			a = minusculo(a);
@@ -94,41 +92,10 @@ int LeituraArquivos::numero_Doc_Palavra(string palavra)
 	return frequencia_.frequenciaPalavra()[palavra].size();
 }
 
-vector<string>LeituraArquivos::vetorNaoRep(vector<string> palavra, string documento) {
-	vector<string> aux;
-	aux.clear();
-	string p;
-	auto i = palavra.begin();
-	for (i = palavra.begin(); i != palavra.end(); ++i) {
-		p = *i;
-		if(!existe(aux, p)){
-			aux.insert(aux.begin(), p);
-		}
-	}
-	return aux;
-}
-
-bool LeituraArquivos::existe(vector<string> x, string palavra) {
-	auto i = x.begin();
-	if (x.empty()) {
-		return false;
-	}
-	string p;
-	for (i = x.begin(); i != x.end(); ++i) {
-		p = *i;
-		if (p == palavra) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-}
-
 void LeituraArquivos::lerclone() {
 	//Cria o documento
 	ifstream words;
-	vector<string> palavras;
+	vector<string> palavras; // Vetor auxiliar
 	for (int i = 1; 1; i++) {
 		words.open("d" + to_string(i) + ".txt"); //vai lendo cada um dos documentos : d1.txt, d2.txt, ... , dn.txt
 		if (i == 1) {
@@ -149,17 +116,21 @@ void LeituraArquivos::lerclone() {
 			a = minusculo(a);
 			a = verifica(a);
 			auto z = palavras.begin();
-			palavras.insert(z, a);
+			palavras.insert(z, a); // Insere todas as palavras do documento X no vetor palavras
 		}
-		palavras = vetorNaoRep(palavras, "d" + to_string(i) + ".txt");
-		wmap aux;
+		palavras = wvector_.vetorNaoRep(palavras, "d" + to_string(i) + ".txt"); // Elimina palavras repetidas no vetor
+		wmap aux; // Map auxiliar
 		auto i1 = palavras.begin();
-		for (i1 = palavras.begin(); i1 != palavras.end(); ++i1) {
-			aux.inserir_no_wmap(*i1, tf("d" + to_string(i) + ".txt", *i1)*idf(*i1));
+		for (i1 = palavras.begin(); i1 != palavras.end(); ++i1) { 
+			// Insere todas as palavras e seus Ws(tf * idf) no wmap auxiliar
+			aux.inserir_no_wmap(*i1, tf("d" + to_string(i) + ".txt", *i1) * idf(*i1)); 
 		}
-
-		wvector_.inserir_vetor(aux);
+		wvector_.inserir_vetor(aux); // Incrementa o wvector oficial com o wmap auxiliar (um para cada doc)
 		words.close();
 	}
+}
+
+void LeituraArquivos::imprimir_w() {
+	wvector_.exibir();
 }
 

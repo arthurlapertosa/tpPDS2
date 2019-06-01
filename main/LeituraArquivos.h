@@ -36,6 +36,7 @@ private:
 	//A frequencia invertida de cada palavra no documento
 	frequencia_invertida frequencia_invertida_;
 
+	//O w propriamente dito
 	wvector wvector_;
 
 public:
@@ -68,12 +69,11 @@ public:
 
 	//Retorna o numero de documentos que a palavra aparece
 	int numero_Doc_Palavra(string palavra);
-	
-	vector<string>vetorNaoRep(vector<string> palavras, string documento);
 
-	bool existe(vector<string> x, string y);
-
+	//Refaz o processo de leitura de arquivos para incrementar no w
 	void lerclone();
+
+	void imprimir_w();
 };
 
 

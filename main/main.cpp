@@ -4,7 +4,8 @@
 int main(){
 	LeituraArquivos arquivos;
 	arquivos.ler();
-	arquivos.imprimirFrequenciaPalavras();
+	arquivos.imprimir_w();
+	//arquivos.imprimirFrequenciaPalavras();
 	//arquivos.imprimirIndice();
 	cout << endl << "O numero total de documentos eh: " << arquivos.numeroDocs() << endl;
 	cout << "Entre com a palavra e com o documento: " << endl;
