@@ -44,7 +44,7 @@ public:
 	LeituraArquivos();
 
 	//Lê os arquivos e coloca eles no indice invertido
-	void ler();
+	void ler(string tipo);
 
 	//Imprime o indice invertido
 	void imprimirIndice();
@@ -71,7 +71,7 @@ public:
 	int numero_Doc_Palavra(string palavra);
 
 	//Refaz o processo de leitura de arquivos para incrementar no w
-	void lerclone();
+	void lerclone(string tipo, vector<string> palavras);
 
 	void imprimir_w();
 };

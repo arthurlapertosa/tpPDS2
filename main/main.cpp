@@ -3,7 +3,7 @@
 
 int main(){
 	LeituraArquivos arquivos;
-	arquivos.ler();
+	arquivos.ler("d");
 	arquivos.imprimir_w();
 	//arquivos.imprimirFrequenciaPalavras();
 	//arquivos.imprimirIndice();
