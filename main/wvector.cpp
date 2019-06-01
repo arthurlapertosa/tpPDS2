@@ -5,7 +5,7 @@ void wvector() {
 }
 
 void wvector::inserir_vetor(wmap documento) {
-	auto i = w_.begin();
+	auto i = w_.end();
 	w_.insert(i, documento);
 }
 
