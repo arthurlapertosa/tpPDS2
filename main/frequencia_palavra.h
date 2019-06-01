@@ -25,7 +25,7 @@ public:
 	//Imprime
 	void imprimir();
 
-	//Retorna a variavel frquencia_palavra_
+	//Retorna a variavel frequencia_palavra_
 	map<string, map<string, int>> frequenciaPalavra();
 
 	//Retorna o map com os documentos que a palavra "palavra" aparece

@@ -1,4 +1,5 @@
 #include "LeituraArquivos.h"
+#include <list>
 
 using namespace std;
 
@@ -31,9 +32,11 @@ void LeituraArquivos::ler() {
 			indice_.inserir(a, "d" + to_string(i) + ".txt"); //Adiciona a palavra ao indice invertido
 			frequencia_.inserir(a, "d" + to_string(i) + ".txt");
 		}
+		
 		words.close();
 	}
 	frequencia_invertida_.inserir(frequencia_.frequenciaPalavra(), numero_doc_);
+	lerclone();
 }
 
 void LeituraArquivos::imprimirIndice(){
@@ -88,3 +91,46 @@ int LeituraArquivos::numero_Doc_Palavra(string palavra)
 {
 	return frequencia_.frequenciaPalavra()[palavra].size();
 }
+
+void LeituraArquivos::lerclone() {
+	//Cria o documento
+	ifstream words;
+	vector<string> palavras; // Vetor auxiliar
+	for (int i = 1; 1; i++) {
+		words.open("d" + to_string(i) + ".txt"); //vai lendo cada um dos documentos : d1.txt, d2.txt, ... , dn.txt
+		if (i == 1) {
+			if (!words.is_open()) {
+				cout << "Falha na leitura de arquivos" << endl;
+				numero_doc_ = 0;
+				break;
+			}
+		}
+		else if (!words.is_open()) { //Se acabarem os documentos, ele sai do loop
+			numero_doc_ = i - 1;
+			break;
+		}
+		string a;
+		palavras.clear();
+		while (!words.eof()) { //Lê todo o arquivo
+			words >> a; //atribui a palavra a variável "a"
+			a = minusculo(a);
+			a = verifica(a);
+			auto z = palavras.begin();
+			palavras.insert(z, a); // Insere todas as palavras do documento X no vetor palavras
+		}
+		palavras = wvector_.vetorNaoRep(palavras, "d" + to_string(i) + ".txt"); // Elimina palavras repetidas no vetor
+		wmap aux; // Map auxiliar
+		auto i1 = palavras.begin();
+		for (i1 = palavras.begin(); i1 != palavras.end(); ++i1) { 
+			// Insere todas as palavras e seus Ws(tf * idf) no wmap auxiliar
+			aux.inserir_no_wmap(*i1, tf("d" + to_string(i) + ".txt", *i1) * idf(*i1)); 
+		}
+		wvector_.inserir_vetor(aux); // Incrementa o wvector oficial com o wmap auxiliar (um para cada doc)
+		words.close();
+	}
+}
+
+void LeituraArquivos::imprimir_w() {
+	wvector_.exibir();
+}
+

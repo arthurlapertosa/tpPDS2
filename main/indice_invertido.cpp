@@ -1,4 +1,5 @@
 #include "indice_invertido.h"
+#include "leituraArquivos.h"
 
 indice_invertido::indice_invertido() {}
 
@@ -21,3 +22,5 @@ void indice_invertido::imprimirIndice() {
 		cout << endl;
 	}
 }
+
+

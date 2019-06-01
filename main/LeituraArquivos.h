@@ -9,6 +9,8 @@
 #include "indice_invertido.h"
 #include "frequencia_palavra.h"
 #include "frequencia_invertida.h"
+#include "wmap.h"
+#include "wvector.h"
 
 using namespace std;
 
@@ -33,6 +35,9 @@ private:
 	
 	//A frequencia invertida de cada palavra no documento
 	frequencia_invertida frequencia_invertida_;
+
+	//O w propriamente dito
+	wvector wvector_;
 
 public:
 	//Inicializa a classe
@@ -64,6 +69,11 @@ public:
 
 	//Retorna o numero de documentos que a palavra aparece
 	int numero_Doc_Palavra(string palavra);
+
+	//Refaz o processo de leitura de arquivos para incrementar no w
+	void lerclone();
+
+	void imprimir_w();
 };
 
 
