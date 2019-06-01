@@ -71,7 +71,7 @@ public:
 	int numero_Doc_Palavra(string palavra);
 
 	//Refaz o processo de leitura de arquivos para incrementar no w
-	void lerclone();
+	void lerclone(vector<string> palavras);
 
 	void imprimir_w();
 };

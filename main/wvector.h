@@ -19,7 +19,7 @@ public:
 	void exibir();
 
 	//Retorna um vetor sem palavras repitidas
-	vector<string> vetorNaoRep(vector<string> palavra, string documento);
+	vector<string> vetorNaoRep(vector<string> palavra);
 
 	//Verifica se a string existe dentro de um vetor
 	bool existe(vector<string> x, string palavra);
