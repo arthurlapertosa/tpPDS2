@@ -39,6 +39,9 @@ private:
 	//O w propriamente dito
 	wvector wvector_;
 
+	//Vector com todas as palavras dos documentos
+	vector<string> palavras_;
+
 public:
 	//Inicializa a classe
 	LeituraArquivos();
@@ -72,6 +75,8 @@ public:
 
 	//Refaz o processo de leitura de arquivos para incrementar no w
 	void lerclone(vector<string> palavras);
+
+	vector<string> palavras_return();
 
 	void imprimir_w();
 };

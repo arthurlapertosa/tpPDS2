@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Busca.cpp" />
     <ClCompile Include="frequencia_palavra.cpp" />
     <ClCompile Include="indice_invertido.cpp" />
     <ClCompile Include="LeituraArquivos.cpp" />
@@ -160,6 +161,7 @@
     <ClCompile Include="wvector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Busca.h" />
     <ClInclude Include="wmap.h" />
     <ClInclude Include="frequencia_invertida.h" />
     <ClInclude Include="frequencia_palavra.h" />
