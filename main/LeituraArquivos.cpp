@@ -11,7 +11,6 @@ LeituraArquivos::LeituraArquivos() {
 void LeituraArquivos::ler() {
 	//Cria o documento
 	ifstream words;
-	vector<string> palavras; // Vetor auxiliar
 	for (int i = 1; 1; i++) {
 		words.open("d" + to_string(i) + ".txt"); //vai lendo cada um dos documentos : d1.txt, d2.txt, ... , dn.txt
 		if (i == 1) {
@@ -32,14 +31,14 @@ void LeituraArquivos::ler() {
 			a = verifica(a);
 			indice_.inserir(a, "d" + to_string(i) + ".txt"); //Adiciona a palavra ao indice invertido
 			frequencia_.inserir(a, "d" + to_string(i) + ".txt");
-			palavras.insert(palavras.end(), a);
+			palavras_.insert(palavras_.end(), a);
 		}
 		words.close();
 	}
 	frequencia_invertida_.inserir(frequencia_.frequenciaPalavra(), numero_doc_);
-	palavras = wvector_.vetorNaoRep(palavras); // Elimina palavras repetidas no vetor
-	auto i1 = palavras.begin();
-	lerclone(palavras);
+	palavras_ = wvector_.vetorNaoRep(palavras_); // Elimina palavras repetidas no vetor
+	auto i1 = palavras_.begin();
+	lerclone(palavras_);
 }
 
 void LeituraArquivos::imprimirIndice(){
@@ -118,6 +117,11 @@ void LeituraArquivos::lerclone(vector<string> palavras) {
 		wvector_.inserir_vetor(aux); // Incrementa o wvector oficial com o wmap auxiliar (um para cada doc)
 		words.close();
 	}
+}
+
+vector<string> LeituraArquivos::palavras_return()
+{
+	return palavras_;
 }
 
 void LeituraArquivos::imprimir_w() {
