@@ -45,3 +45,9 @@ bool wvector::existe(vector<string> x, string palavra) {
 	return false;
 }
 
+wmap wvector::operator[](int documento)
+{
+	int indice = documento - 1;
+	return w_[indice];
+}
+

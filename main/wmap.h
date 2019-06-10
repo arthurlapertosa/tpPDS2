@@ -15,6 +15,8 @@ public:
 	void inserir_no_wmap(string palavra, double valor);
 
 	void exibir();
+
+	double operator[](string palavra);
 };
 
 #endif WSET_H

@@ -79,6 +79,9 @@ public:
 	vector<string> palavras_return();
 
 	void imprimir_w();
+
+	//retorna o w_vector
+	wvector retornar_w_vector();
 };
 
 

@@ -128,3 +128,8 @@ void LeituraArquivos::imprimir_w() {
 	wvector_.exibir();
 }
 
+wvector LeituraArquivos::retornar_w_vector()
+{
+	return wvector_;
+}
+

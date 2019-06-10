@@ -3,8 +3,13 @@
 #include "LeituraArquivos.h"
 #include "wmap.h"
 #include "frequencia_palavra.h"
+#include "wvector.h"
 #include <string>
 #include <sstream>
+#include <cmath>
+#include <list>
+
+using namespace std;
 
 class Busca
 {
@@ -21,11 +26,13 @@ private:
 
 	//Tf da pesquisa
 	frequencia_palavra tf_pesquisa_;
-public:
-	Busca();
+	
+	//Map do cosine ranking
+	map<double, list<string>> cosine_ranking_;
 
-	//Busca do usuário
-	void pesquisa_usuario();
+	//wvector com do documento
+	wvector wvector_;
+
 
 	//Lê os arquivos na pasta
 	void LeituraDosArquivos();
@@ -39,7 +46,28 @@ public:
 	//Constroi o w da pesquisa do usuário
 	void w_pesquisa_construcao();
 
-	~Busca();
+	//constroi o consine ranking
+	void cosine_ranking_build();
+
+	//Parte de cima da formula de similaridade
+	double parte_de_cima_sim(int num_doc);
+
+	//Parte de baixo-direita da formula de similaridade
+	double parte_de_baixo_dir_sim();
+
+	//Parte de baixo-esquerda da formula de similaridade
+	double parte_de_baixo_esq_sim(int num_doc);
+
+	//Imprime o resultado da pesquisa
+	void imprimir_resultado_pesquisa();
+
+
+public:
+	Busca();
+
+	//Busca do usuário
+	void pesquisa_usuario();
+	
 };
 
 
