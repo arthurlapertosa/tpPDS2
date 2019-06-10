@@ -53,6 +53,9 @@
     <Text Include="d4.txt">
       <Filter>Arquivos de Recurso</Filter>
     </Text>
+    <Text Include="d5.txt">
+      <Filter>Arquivos de Recurso</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LeituraArquivos.h">

@@ -18,10 +18,9 @@ void Busca::pesquisa_usuario(){
 	tf_pesquisa();
 	w_pesquisa_construcao();
 
-	//cout << endl;
-	//arquivos_.imprimir_w();
-
 	cosine_ranking_build();
+
+	imprimir_resultado_pesquisa();//imprime o resultado da pesquisa
 }
 
 
@@ -62,14 +61,15 @@ void Busca::cosine_ranking_build()
 {
 	double sim;
 	string documento;
-	for (int i = 1; i <= arquivos_.numeroDocs(); i++) { //tem o mais um aqui, pois 
+	//Elemento ja pode estar no mapa, pois se existirem 2 documentos com o mesmo peso, um dos 2 documentos não será adicionado ao mapa
+	pair<map<double, list<string>>::iterator, bool> ret; //Cria a variável tipo bool que testa se o elemento já está no mapa
+	for (int i = 1; i <= arquivos_.numeroDocs(); i++) { //Itera entre os documentos
 		sim = parte_de_cima_sim(i) / (sqrt(parte_de_baixo_dir_sim()) * sqrt(parte_de_baixo_esq_sim(i)));
 		documento = "d" + to_string(i) + ".txt";
-		cosine_ranking_.insert({ sim, documento });
-	}
-	for (auto it = cosine_ranking_.rbegin(); it != cosine_ranking_.rend(); it++)
-	{
-		std::cout << it->first << "  " << it->second << endl;
+		ret = cosine_ranking_.insert({ sim, {documento} }); //Insere o elemento no dicionário, sendo o índice a palavra. Se a palavra já existir, retorna false para o iterator ret, e o índice não é criado
+		if (!ret.second) { //Se não existir o elemento já no mapa
+			cosine_ranking_[sim].push_back(documento); //vai adicionando os nomes dos documentos
+		}
 	}
 }
 
@@ -103,6 +103,13 @@ double Busca::parte_de_baixo_esq_sim(int num_doc)
 	return soma;
 }
 
-Busca::~Busca()
-{
+void Busca::imprimir_resultado_pesquisa() {
+	for (auto it = cosine_ranking_.rbegin(); it != cosine_ranking_.rend(); it++)
+	{
+		cout << it->first << " => ";
+		for (auto i = it->second.begin(); i != it->second.end(); i++) {
+			cout << *i << " ";
+		}
+		cout << endl;
+	}
 }

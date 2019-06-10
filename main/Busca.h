@@ -7,6 +7,9 @@
 #include <string>
 #include <sstream>
 #include <cmath>
+#include <list>
+
+using namespace std;
 
 class Busca
 {
@@ -25,15 +28,11 @@ private:
 	frequencia_palavra tf_pesquisa_;
 	
 	//Map do cosine ranking
-	map<double, string> cosine_ranking_;
+	map<double, list<string>> cosine_ranking_;
 
 	//wvector com do documento
 	wvector wvector_;
-public:
-	Busca();
 
-	//Busca do usuário
-	void pesquisa_usuario();
 
 	//Lê os arquivos na pasta
 	void LeituraDosArquivos();
@@ -50,16 +49,25 @@ public:
 	//constroi o consine ranking
 	void cosine_ranking_build();
 
-	//Parte de cima da similaridade
+	//Parte de cima da formula de similaridade
 	double parte_de_cima_sim(int num_doc);
 
-	//Parte de baixo-direita da similaridade
+	//Parte de baixo-direita da formula de similaridade
 	double parte_de_baixo_dir_sim();
 
-	//Parte de baixo-esquerda da similaridade
+	//Parte de baixo-esquerda da formula de similaridade
 	double parte_de_baixo_esq_sim(int num_doc);
 
-	~Busca();
+	//Imprime o resultado da pesquisa
+	void imprimir_resultado_pesquisa();
+
+
+public:
+	Busca();
+
+	//Busca do usuário
+	void pesquisa_usuario();
+	
 };
 
 
