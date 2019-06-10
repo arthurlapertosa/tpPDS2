@@ -16,3 +16,8 @@ void wmap::exibir() {
 	}
 	//system("pause");
 }
+
+double wmap::operator[](string palavra)
+{
+	return wmap_[palavra];
+}

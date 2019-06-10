@@ -3,8 +3,10 @@
 #include "LeituraArquivos.h"
 #include "wmap.h"
 #include "frequencia_palavra.h"
+#include "wvector.h"
 #include <string>
 #include <sstream>
+#include <cmath>
 
 class Busca
 {
@@ -21,6 +23,12 @@ private:
 
 	//Tf da pesquisa
 	frequencia_palavra tf_pesquisa_;
+	
+	//Map do cosine ranking
+	map<double, string> cosine_ranking_;
+
+	//wvector com do documento
+	wvector wvector_;
 public:
 	Busca();
 
@@ -38,6 +46,18 @@ public:
 
 	//Constroi o w da pesquisa do usuário
 	void w_pesquisa_construcao();
+
+	//constroi o consine ranking
+	void cosine_ranking_build();
+
+	//Parte de cima da similaridade
+	double parte_de_cima_sim(int num_doc);
+
+	//Parte de baixo-direita da similaridade
+	double parte_de_baixo_dir_sim();
+
+	//Parte de baixo-esquerda da similaridade
+	double parte_de_baixo_esq_sim(int num_doc);
 
 	~Busca();
 };
