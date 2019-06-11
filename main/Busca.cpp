@@ -12,7 +12,8 @@ Busca::Busca()
 void Busca::pesquisa_usuario(){
 	//arquivos_.imprimirFrequenciaPalavras(); //cola para os testes
 	//arquivos_.imprimirFrequenciaInvertidaPalavras(); 
-	cout << arquivos_.numero_Doc_Palavra("guardachuva") << endl;
+	//arquivos_.imprimir_w();
+	//cout << arquivos_.numero_Doc_Palavra("guardachuva") << endl;
 
 	cout << "Digite sua busca" << endl;
 	getline(cin, pesquisa_); //cin para pegar tudo, inclusive os espaços

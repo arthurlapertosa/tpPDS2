@@ -23,4 +23,9 @@ void indice_invertido::imprimirIndice() {
 	}
 }
 
+map<string, set<string>> indice_invertido::indiceInvertido()
+{
+	return my_map_;
+}
+
 

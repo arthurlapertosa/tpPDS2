@@ -50,3 +50,8 @@ wmap wvector::operator[](int documento)
 	return w_[indice];
 }
 
+vector<wmap> wvector::w_vector()
+{
+	return w_;
+}
+

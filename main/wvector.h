@@ -26,7 +26,11 @@ public:
 	//Verifica se a string existe dentro de um vetor
 	bool existe(vector<string> x, string palavra);
 
+	//Operator que retorna o wmap do documento
 	wmap operator[](int documento);
+
+	//retorna o w_
+	vector<wmap> w_vector();
 };
 
 #endif WVECTOR_H

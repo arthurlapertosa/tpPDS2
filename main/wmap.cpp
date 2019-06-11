@@ -20,3 +20,8 @@ double wmap::operator[](string palavra)
 {
 	return wmap_[palavra];
 }
+
+map<string, double> wmap::w_map()
+{
+	return wmap_;
+}

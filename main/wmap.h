@@ -20,6 +20,8 @@ public:
 
 	//Atribui ao operador [] em que o argumênto é a palavra, a função de retornar o w correspondente 
 	double operator[](string palavra);
+
+	map<string, double> w_map();
 };
 
 #endif WSET_H

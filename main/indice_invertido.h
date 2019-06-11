@@ -21,6 +21,9 @@ public:
 
 	//Imprime o indice invertido
 	void imprimirIndice();
+
+	//retorna o map
+	map<string, set<string>> indiceInvertido();
 };
 
 

@@ -31,6 +31,7 @@ void LeituraArquivos::ler() {
 			a = verifica(a);
 			indice_.inserir(a, "d" + to_string(i) + ".txt"); //Adiciona a palavra ao indice invertido
 			frequencia_.inserir(a, "d" + to_string(i) + ".txt");
+			frequencia_clone_.inserir(a, "d" + to_string(i) + ".txt");
 			palavras_.insert(palavras_.end(), a);
 		}
 		words.close();
@@ -51,7 +52,7 @@ void LeituraArquivos::imprimirFrequenciaPalavras() {
 
 int LeituraArquivos::tf(string documento, string palavra)
 {
-	return frequencia_.frequenciaPalavraNoDocumento(documento, palavra);
+	return frequencia_clone_.frequenciaPalavraNoDocumento(documento, palavra); 
 }
 
 void LeituraArquivos::imprimirFrequenciaInvertidaPalavras()
