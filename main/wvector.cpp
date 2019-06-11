@@ -1,5 +1,4 @@
 #include "wvector.h"
-using namespace std;
 
 void wvector() {
 }
