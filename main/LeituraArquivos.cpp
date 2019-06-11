@@ -65,12 +65,16 @@ double LeituraArquivos::idf(string palavra)
 }
 
 string LeituraArquivos::verifica(string a) {
-	for (int i = 0; i < a.size(); i++) { //verifica cada caracter da palavra
-		if (!(a[i] >= 'a' && a[i] <= 'z' || a[i] == 'ç')) { //verifica quais sao especiais
+	int i = 0;
+	while (i < a.size()) { //verifica todos os caracteres
+		if (!(a[i] >= 'a' && a[i] <= 'z' || a[i] == 'ç')) {
 			for (int j = i; j < a.size() - 1; j++) {
-				a[j] = a[j + 1]; //substitui pelo caracter seguinte
+				a[j] = a[j+1]; //substitui pelo caracter seguinte
 			}
-			a[a.size() - 1] = '\0'; //elimina o ultimo
+			a.pop_back(); //elimina o ultimo
+		}
+		else {
+			i++;
 		}
 	}
 	return a;

@@ -1,5 +1,4 @@
 #include "wmap.h"
-#include <stdlib.h>
 
 void wmap() {
 }
