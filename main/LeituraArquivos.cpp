@@ -70,7 +70,7 @@ string LeituraArquivos::verifica(string a) {
 			for (int j = i; j < a.size() - 1; j++) {
 				a[j] = a[j + 1]; //substitui pelo caracter seguinte
 			}
-			a[a.size() - 1] = '\0'; //elimina o ultimo
+			a.pop_back(); //elimina o ultimo
 		}
 	}
 	return a;
