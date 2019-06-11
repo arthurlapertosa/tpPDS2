@@ -9,7 +9,9 @@ void frequencia_invertida::inserir(map<string, map<string, int>> frequencia_pala
 for (auto i = frequencia_palavra_.begin(); i != frequencia_palavra_.end(); i++) {
 	string palavra = i->first;
 	double frequencia_int;
-	frequencia_int = log10((num_docs_total / frequencia_palavra_[palavra].size()));
+	double num_docs = num_docs_total;
+	double quantidade_docs_palavra_aparece = frequencia_palavra_[palavra].size();
+	frequencia_int = log10((num_docs / quantidade_docs_palavra_aparece));
 	frequencia_invertida_palavra_.insert(std::pair<string, double>(palavra, frequencia_int));//Adiciona o elemento ao mapa frequencia_total_palavra_
 	}
 }

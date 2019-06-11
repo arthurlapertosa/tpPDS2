@@ -25,8 +25,8 @@ void LeituraArquivos::ler() {
 			break;
 		}
 		string a;
-		while (!words.eof()) { //LÍ todo o arquivo
-			words >> a; //atribui a palavra a vari·vel "a"
+		while (!words.eof()) { //L√™ todo o arquivo
+			words >> a; //atribui a palavra a vari√°vel "a"
 			a = minusculo(a);
 			a = verifica(a);
 			indice_.inserir(a, "d" + to_string(i) + ".txt"); //Adiciona a palavra ao indice invertido
@@ -67,7 +67,7 @@ double LeituraArquivos::idf(string palavra)
 string LeituraArquivos::verifica(string a) {
 	int i = 0;
 	while (i < a.size()) { //verifica todos os caracteres
-		if (!(a[i] >= 'a' && a[i] <= 'z' || a[i] == 'Á')) {
+		if (!(a[i] >= 'a' && a[i] <= 'z' || a[i] == '√ß')) {
 			for (int j = i; j < a.size() - 1; j++) {
 				a[j] = a[j+1]; //substitui pelo caracter seguinte
 			}
@@ -81,7 +81,7 @@ string LeituraArquivos::verifica(string a) {
 }
 
 string LeituraArquivos::minusculo(string a) {
-	transform(a.begin(), a.end(), a.begin(), ::tolower); //Coloca todas as letras para min˙sculo
+	transform(a.begin(), a.end(), a.begin(), ::tolower); //Coloca todas as letras para min√∫sculo
 	return a;
 }
 

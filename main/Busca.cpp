@@ -89,7 +89,7 @@ void Busca::cosine_ranking_build()
 		}
 		documento = "d" + to_string(i) + ".txt";
 
-		ret = cosine_ranking_.insert({ sim, {documento} }); //Insere o elemento no dicionário, sendo o índice a palavra. Se a palavra já existir, retorna false para o iterator ret, e o índice não é criado
+		ret = cosine_ranking_.insert({ sim, {documento} }); //Insere o elemento no dicionário, sendo o indice a similaridade do documento com a busca. Se a palavra já existir, retorna false para o iterator ret, e o índice não é criado
 		if (!ret.second) { //Se não existir o elemento já no mapa
 			cosine_ranking_[sim].push_back(documento); //vai adicionando os nomes dos documentos
 		}
