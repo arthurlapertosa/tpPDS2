@@ -33,6 +33,13 @@ private:
 	//wvector com do documento
 	wvector wvector_;
 
+	friend class Teste;
+
+public:
+	Busca();
+
+	//Realiza todo o processo da maquininha de busca do usuário
+	void pesquisa_usuario();
 
 	//Lê os arquivos na pasta
 	void LeituraDosArquivos();
@@ -60,13 +67,6 @@ private:
 
 	//Imprime o resultado da pesquisa
 	void imprimir_resultado_pesquisa();
-
-
-public:
-	Busca();
-
-	//Busca do usuário
-	void pesquisa_usuario();
 	
 };
 
