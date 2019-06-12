@@ -73,9 +73,6 @@ public:
 
 	//Imprime o resultado da pesquisa
 	void imprimir_resultado_pesquisa();
-	
-	//retorna o map do cosine ranking para testes
-	map<double, list<string>> cosine_ranking();
 };
 
 

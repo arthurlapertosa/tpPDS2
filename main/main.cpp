@@ -37,10 +37,10 @@ public:
 	static frequencia_palavra tf_pesquisa(const Busca& a) {
 		return a.tf_pesquisa_; //Tf da pesquisa
 	}
-	map<double, list<string>> cosine_ranking(const Busca& a) {
+	static map<double, list<string>> cosine_ranking(const Busca& a) {
 		return a.cosine_ranking_; //Map do cosine ranking
 	}
-	wvector w_vector(const Busca& a) {
+	static wvector w_vector(const Busca& a) {
 		return a.wvector_; //wvector com do documento
 	}
 };
@@ -245,17 +245,16 @@ TEST_SUITE("Busca") {
 
 	TEST_CASE("Busca(string pesquisa): realizar várias pesquisas diferentes e conferir resultado do cosine ranking") {
 		Busca FIRST("Oi");
-		CHECK(FIRST.cosine_ranking().size() == 1);
-		CHECK(first_key(FIRST.cosine_ranking()) == 0.0);
-		CHECK(compare_lists(FIRST.cosine_ranking()[0.0], { "d1.txt", "d2.txt", "d3.txt", "d4.txt", "d5.txt", "d6.txt" }));
-		CHECK(compare_lists(first_list(FIRST.cosine_ranking()), { "d1.txt", "d2.txt", "d3.txt", "d4.txt", "d5.txt", "d6.txt" }));
+		CHECK(Teste::cosine_ranking(FIRST).size() == 1);
+		CHECK(first_key(Teste::cosine_ranking(FIRST)) == 0.0);
+		CHECK(compare_lists(Teste::cosine_ranking(FIRST)[0.0], { "d1.txt", "d2.txt", "d3.txt", "d4.txt", "d5.txt", "d6.txt" }));
+		CHECK(compare_lists(first_list(Teste::cosine_ranking(FIRST)), { "d1.txt", "d2.txt", "d3.txt", "d4.txt", "d5.txt", "d6.txt" }));
 
 		Busca SECOND("guardachuva como");
-		CHECK(SECOND.cosine_ranking().size() == 2);
-		CHECK(compare_lists(first_list(SECOND.cosine_ranking()), { "d1.txt" })); //Testa se o documento mais proximo dessa pesquisa realmente eh o d1.txt
-		CHECK(compare_lists(second_list(SECOND.cosine_ranking()), { "d2.txt", "d3.txt", "d4.txt", "d5.txt", "d6.txt" }));
-		CHECK(floor(first_key(SECOND.cosine_ranking()) * 10000) / 10000 == 0.7853); //Testa se o cosine ranking entre a pesquisa "guarda-chuva como" e o documento "d1.txt" é igual a 0.7853
-		CHECK(floor(second_key(SECOND.cosine_ranking()) * 10000) / 10000 == 0.0); //Testa se o cosine ranking entre a pesquisa "guarda-chuva como" e os documentos {"d2.txt", "d3.txt", "d4.txt", "d5.txt", "d6.txt"} é igual a 0.0
-
+		CHECK(Teste::cosine_ranking(SECOND).size() == 2);
+		CHECK(compare_lists(first_list(Teste::cosine_ranking(SECOND)), { "d1.txt" })); //Testa se o documento mais proximo dessa pesquisa realmente eh o d1.txt
+		CHECK(compare_lists(second_list(Teste::cosine_ranking(SECOND)), { "d2.txt", "d3.txt", "d4.txt", "d5.txt", "d6.txt" }));
+		CHECK(floor(first_key(Teste::cosine_ranking(SECOND)) * 10000) / 10000 == 0.7853); //Testa se o cosine ranking entre a pesquisa "guarda-chuva como" e o documento "d1.txt" é igual a 0.7853
+		CHECK(floor(second_key(Teste::cosine_ranking(SECOND)) * 10000) / 10000 == 0.0); //Testa se o cosine ranking entre a pesquisa "guarda-chuva como" e os documentos {"d2.txt", "d3.txt", "d4.txt", "d5.txt", "d6.txt"} é igual a 0.0
 	}
 }
