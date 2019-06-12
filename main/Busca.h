@@ -37,9 +37,15 @@ private:
 
 public:
 	Busca();
+	
+	//Inicializa a classe busca e realiza a busca com o parametro passado
+	Busca(string pesquisa);
 
-	//Realiza todo o processo da maquininha de busca do usuário
-	void pesquisa_usuario();
+	//Realiza todo o processo de pesquisar com o usuário digitando a pesquisa na tela
+	void pesquisa_usuario_digita();
+
+	//Realiza todo o processo da maquininha de busca
+	void pesquisa_usuario(string pesquisa);
 
 	//Lê os arquivos na pasta
 	void LeituraDosArquivos();
@@ -68,6 +74,8 @@ public:
 	//Imprime o resultado da pesquisa
 	void imprimir_resultado_pesquisa();
 	
+	//retorna o map do cosine ranking para testes
+	map<double, list<string>> cosine_ranking();
 };
 
 

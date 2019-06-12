@@ -3,7 +3,7 @@
 //
 //int main(){
 //	Busca primeiro;
-//	primeiro.pesquisa_usuario();
+//	primeiro.pesquisa_usuario_digita();
 //} 
 
 /////////////////////////// ACIMA DISTO, MAIN NORMAL 
@@ -17,6 +17,8 @@
 #include "busca.h"
 #include <iostream>
 #include "doctest.h"
+#include <cmath>
+#include <list>
 
 #include <limits>
 
@@ -35,7 +37,7 @@ public:
 	static frequencia_palavra tf_pesquisa(const Busca& a) {
 		return a.tf_pesquisa_; //Tf da pesquisa
 	}
-	map<double, list<string>> cosine_ranking(const Busca &a) {
+	map<double, list<string>> cosine_ranking(const Busca& a) {
 		return a.cosine_ranking_; //Map do cosine ranking
 	}
 	wvector w_vector(const Busca& a) {
@@ -43,15 +45,77 @@ public:
 	}
 };
 
-//std::ostream& operator<< (std::ostream& os, Complexo& c) {
-//	if (c.imag() >= 0.0) {
-//		os << c.real() << " + " << c.imag() << "i";
-//	}
-//	else {
-//		os << c.real() << " - " << -c.imag() << "i";
-//	}
-//	return os;
-//}
+//////////////////////////////////////////// FERRAMENTA PARA COMPARAR DUAS LISTAS
+bool compare_lists(list<string> a, list<string> b) {
+	if (a.size() != b.size()) return false;
+	auto i = a.begin();
+	auto j = b.begin();
+	for (; i != a.end() && j != b.end(); i++, j++) {
+		if (*i != *j) return false;
+	}
+	return true;
+}
+//////////////////////// FERRAMENTAS PARA AJUDAR A ACESSAR AS LISTAS DE DOCUMENTOS DO MAP DO COSINE RANKING -- EM ORDEM DO DOCUMENTO MAIS RELEVANTE PARA O MENOS RELEVANTE
+list<string> first_list(map<double, list<string>> a) { //retorna a lista do ultimo elemento do map
+	auto i = a.rbegin();
+	return i->second;
+}
+list<string> second_list(map<double, list<string>> a) {
+	auto i = a.rbegin();
+	i++;
+	return i->second;
+}
+list<string> third_list(map<double, list<string>> a) {
+	auto i = a.rbegin();
+	i++; i++;
+	return i->second;
+}
+list<string> fourth_list(map<double, list<string>> a) {
+	auto i = a.rbegin();
+	i++; i++; i++;
+	return i->second;
+}
+list<string> fifth_list(map<double, list<string>> a) {
+	auto i = a.rbegin();
+	i++; i++; i++; i++;
+	return i->second;
+}
+list<string> sixth_list(map<double, list<string>> a) {
+	auto i = a.rbegin();
+	i++; i++; i++; i++; i++;
+	return i->second;
+}
+
+///////////////////////////////////////// FERRAMENTAS PARA AJUDAR A ACESSAR OS ELEMENTOS CHAVE DO MAP DO COSINE RANKING
+double first_key(map<double, list<string>> a) { //retorna a lista do ultimo elemento do map
+	auto i = a.rbegin();
+	return i->first;
+}
+double second_key(map<double, list<string>> a) {
+	auto i = a.rbegin();
+	i++;
+	return i->first;
+}
+double third_key(map<double, list<string>> a) {
+	auto i = a.rbegin();
+	i++; i++;
+	return i->first;
+}
+double fourth_key(map<double, list<string>> a) {
+	auto i = a.rbegin();
+	i++; i++; i++;
+	return i->first;
+}
+double fifth_key(map<double, list<string>> a) {
+	auto i = a.rbegin();
+	i++; i++; i++; i++;
+	return i->first;
+}
+double sixth_key(map<double, list<string>> a) {
+	auto i = a.rbegin();
+	i++; i++; i++; i++; i++;
+	return i->first;
+}
 
 TEST_SUITE("Busca") {
 	Busca a;
@@ -120,41 +184,78 @@ TEST_SUITE("Busca") {
 		CHECK(Teste::arquivos(a).retornar_w_vector()[1]["oi"] == 0); //W da palavra oi do documento d1.txt
 		CHECK((Teste::arquivos(a).retornar_w_vector()[1]["voce"] > 0.158 && Teste::arquivos(a).retornar_w_vector()[1]["voce"] < 0.159)); //0.1583
 		CHECK((Teste::arquivos(a).retornar_w_vector()[1]["casa"] > 0.175 && Teste::arquivos(a).retornar_w_vector()[1]["casa"] < 0.177)); //0.1760
-		CHECK(Teste::arquivos(a).retornar_w_vector()[1]["coisas"] == 0); 
+		CHECK(floor(Teste::arquivos(a).retornar_w_vector()[1]["coisas"] * 10000) / 10000 == 0.3010); //Função floor usada para arrendondar o valor com 3 casas de decimais
 		CHECK(Teste::arquivos(a).retornar_w_vector()[1]["pessoas"] == 0); 
 		CHECK(Teste::arquivos(a).retornar_w_vector()[1]["precisamos"] == 0); 
 
 		/////////////////////////////// d2.txt
 		CHECK(Teste::arquivos(a).retornar_w_vector()[2]["oi"] == 0); //W da palavra oi do documento d1.txt
-		CHECK(Teste::arquivos(a).retornar_w_vector()[2]["voce"] == 0);
-		CHECK(Teste::arquivos(a).retornar_w_vector()[2]["casa"] == 0);
-		CHECK(Teste::arquivos(a).retornar_w_vector()[2]["coisas"] == 0);
-		CHECK(Teste::arquivos(a).retornar_w_vector()[2]["pessoas"] == 0);
-		CHECK(Teste::arquivos(a).retornar_w_vector()[2]["precisamos"] == 0);
+		CHECK(floor(Teste::arquivos(a).retornar_w_vector()[2]["voce"] * 10000) / 10000 == 0.0791);
+		CHECK(floor(Teste::arquivos(a).retornar_w_vector()[2]["casa"] * 10000) / 10000 == 0.1760);
+		CHECK(floor(Teste::arquivos(a).retornar_w_vector()[2]["coisas"] * 10000) / 10000 == 0);
+		CHECK(floor(Teste::arquivos(a).retornar_w_vector()[2]["pessoas"] * 10000) / 10000 == 0);
+		CHECK(floor(Teste::arquivos(a).retornar_w_vector()[2]["precisamos"]* 10000) / 10000 == 0);
 
 		/////////////////////////////// d3.txt
 		CHECK(Teste::arquivos(a).retornar_w_vector()[3]["oi"] == 0); //W da palavra oi do documento d1.txt
-		CHECK(Teste::arquivos(a).retornar_w_vector()[3]["voce"] == 0);
-		CHECK(Teste::arquivos(a).retornar_w_vector()[3]["casa"] == 0);
-		CHECK(Teste::arquivos(a).retornar_w_vector()[3]["coisas"] == 0);
-		CHECK(Teste::arquivos(a).retornar_w_vector()[3]["pessoas"] == 0);
-		CHECK(Teste::arquivos(a).retornar_w_vector()[3]["precisamos"] == 0);
+		CHECK(floor(Teste::arquivos(a).retornar_w_vector()[3]["voce"] * 10000) / 10000 == 0.3167);
+		CHECK(floor(Teste::arquivos(a).retornar_w_vector()[3]["casa"] * 10000) / 10000 == 0);
+		CHECK(floor(Teste::arquivos(a).retornar_w_vector()[3]["coisas"] * 10000) / 10000 == 0);
+		CHECK(floor(Teste::arquivos(a).retornar_w_vector()[3]["pessoas"] * 10000) / 10000 == 0);
+		CHECK(floor(Teste::arquivos(a).retornar_w_vector()[3]["precisamos"] * 10000) / 10000 == 0);
 
 		/////////////////////////////// d4.txt
 		CHECK(Teste::arquivos(a).retornar_w_vector()[4]["oi"] == 0); //W da palavra oi do documento d1.txt
-		CHECK(Teste::arquivos(a).retornar_w_vector()[4]["voce"] == 0);
-		CHECK(Teste::arquivos(a).retornar_w_vector()[4]["casa"] == 0);
-		CHECK(Teste::arquivos(a).retornar_w_vector()[4]["coisas"] == 0);
-		CHECK(Teste::arquivos(a).retornar_w_vector()[4]["pessoas"] == 0);
-		CHECK(Teste::arquivos(a).retornar_w_vector()[4]["precisamos"] == 0);
+		CHECK(floor(Teste::arquivos(a).retornar_w_vector()[4]["voce"] * 10000) / 10000 == 0.3959);
+		CHECK(floor(Teste::arquivos(a).retornar_w_vector()[4]["casa"] * 10000) / 10000 == 0);
+		CHECK(floor(Teste::arquivos(a).retornar_w_vector()[4]["coisas"] * 10000) / 10000 == 0.6020);
+		CHECK(floor(Teste::arquivos(a).retornar_w_vector()[4]["pessoas"] * 10000) / 10000 == 0.4771);
+		CHECK(floor(Teste::arquivos(a).retornar_w_vector()[4]["precisamos"] * 10000) / 10000 == 0.7781);
 
 		/////////////////////////////// d5.txt
 		CHECK(Teste::arquivos(a).retornar_w_vector()[5]["oi"] == 0); //W da palavra oi do documento d1.txt
-		CHECK(Teste::arquivos(a).retornar_w_vector()[5]["voce"] == 0);
-		CHECK(Teste::arquivos(a).retornar_w_vector()[5]["casa"] == 0);
-		CHECK(Teste::arquivos(a).retornar_w_vector()[5]["coisas"] == 0);
-		CHECK(Teste::arquivos(a).retornar_w_vector()[5]["pessoas"] == 0);
-		CHECK(Teste::arquivos(a).retornar_w_vector()[5]["precisamos"] == 0);
+		CHECK(floor(Teste::arquivos(a).retornar_w_vector()[5]["voce"] * 10000) / 10000 == 0.0791);
+		CHECK(floor(Teste::arquivos(a).retornar_w_vector()[5]["casa"] * 10000) / 10000 == 0.3521);
+		CHECK(floor(Teste::arquivos(a).retornar_w_vector()[5]["coisas"] * 10000) / 10000 == 0);
+		CHECK(floor(Teste::arquivos(a).retornar_w_vector()[5]["pessoas"] * 10000) / 10000 == 0);
+		CHECK(floor(Teste::arquivos(a).retornar_w_vector()[5]["precisamos"] * 10000) / 10000 == 0);
+
+		/////////////////////////////// d6.txt
+		CHECK(Teste::arquivos(a).retornar_w_vector()[6]["oi"] == 0); //W da palavra oi do documento d1.txt
+		CHECK(floor(Teste::arquivos(a).retornar_w_vector()[6]["voce"] * 10000) / 10000 == 0);
+		CHECK(floor(Teste::arquivos(a).retornar_w_vector()[6]["casa"] * 10000) / 10000 == 0.1760);
+		CHECK(floor(Teste::arquivos(a).retornar_w_vector()[6]["coisas"] * 10000) / 10000 == 0.3010);
+		CHECK(floor(Teste::arquivos(a).retornar_w_vector()[6]["pessoas"] * 10000) / 10000 == 0.4771);
+		CHECK(floor(Teste::arquivos(a).retornar_w_vector()[6]["precisamos"] * 10000) / 10000 == 0);
+	}
+
+	TEST_CASE("LeituraArquivos: W_VECTOR - bool existe(vector<string> x, string palavra)") {
+		CHECK(Teste::arquivos(a).retornar_w_vector().existe({ "ola", "como", "bool" }, "bool"));
+		CHECK_FALSE(Teste::arquivos(a).retornar_w_vector().existe({ "ola", "como", "bool" }, "oi"));
+		CHECK(Teste::arquivos(a).retornar_w_vector().existe({ "ola", "como", "bool", "PDS", "trabalho" }, "trabalho"));
+	}
+
+	TEST_CASE("LeituraArquivos: W_VECTOR - vector<string> vetorNaoRep(vector<string> palavra)") {
+		CHECK(Teste::arquivos(a).retornar_w_vector().vetorNaoRep({"como", "como"}).size() == 1);
+		CHECK(Teste::arquivos(a).retornar_w_vector().vetorNaoRep({"oi", "oi", "oi"}).size() == 1);
+		CHECK(Teste::arquivos(a).retornar_w_vector().vetorNaoRep({"oi", "oi", "como", "como"}).size() == 2);
+		CHECK(Teste::arquivos(a).retornar_w_vector().vetorNaoRep({"oi", "oi", "como", "ola"}).size() == 3);
+		CHECK_FALSE(Teste::arquivos(a).retornar_w_vector().vetorNaoRep({"oi", "oi", "como", "ola"}).size() == 4);
+	}
+
+	TEST_CASE("Busca(string pesquisa): realizar várias pesquisas diferentes e conferir resultado do cosine ranking") {
+		Busca first("Oi");
+		CHECK(first.cosine_ranking().size() == 1);
+		CHECK(first_key(first.cosine_ranking()) == 0.0);
+		CHECK(compare_lists(first.cosine_ranking()[0.0], { "d1.txt", "d2.txt", "d3.txt", "d4.txt", "d5.txt", "d6.txt" }));
+		CHECK(compare_lists(first_list(first.cosine_ranking()), { "d1.txt", "d2.txt", "d3.txt", "d4.txt", "d5.txt", "d6.txt" }));
+
+		Busca second("guardachuva como");
+		CHECK(second.cosine_ranking().size() == 2);
+		CHECK(compare_lists(first_list(second.cosine_ranking()), { "d1.txt" })); //Testa se o documento mais proximo dessa pesquisa realmente eh o d1.txt
+		CHECK(compare_lists(second_list(second.cosine_ranking()), { "d2.txt", "d3.txt", "d4.txt", "d5.txt", "d6.txt" }));
+		CHECK(floor(first_key(second.cosine_ranking()) * 10000) / 10000 == 0.7853); //Testa se o cosine ranking entre a pesquisa "guarda-chuva como" e o documento "d1.txt" é igual a 0.7853
+		CHECK(floor(second_key(second.cosine_ranking()) * 10000) / 10000 == 0.0); //Testa se o cosine ranking entre a pesquisa "guarda-chuva como" e os documentos {"d2.txt", "d3.txt", "d4.txt", "d5.txt", "d6.txt"} é igual a 0.0
 
 	}
 }

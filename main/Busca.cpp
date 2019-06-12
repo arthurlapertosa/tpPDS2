@@ -9,23 +9,36 @@ Busca::Busca()
 	wvector_ = arquivos_.retornar_w_vector();
 }
 
-void Busca::pesquisa_usuario(){
-	//arquivos_.imprimirFrequenciaPalavras(); //cola para os testes
-	//arquivos_.imprimirFrequenciaInvertidaPalavras(); 
-	//arquivos_.imprimir_w();
-	//cout << arquivos_.numero_Doc_Palavra("guardachuva") << endl;
+Busca::Busca(string pesquisa) : Busca() {
+	pesquisa_usuario(pesquisa);
+}
 
+void Busca::pesquisa_usuario_digita()
+{
+	string pesquisa;
 	cout << "Digite sua busca" << endl;
-	getline(cin, pesquisa_); //cin para pegar tudo, inclusive os espaços
+	getline(cin, pesquisa); //cin para pegar tudo, inclusive os espaços
+
+	pesquisa_usuario(pesquisa); //Realiza a pesquisa
+
+	imprimir_resultado_pesquisa();//imprime o resultado da pesquisa
+}
+
+
+
+void Busca::pesquisa_usuario(string pesquisa){
+
 	
+	pesquisa = arquivos_.minusculo(pesquisa); //Transforma tudo em minusculo
+
+	pesquisa_ = pesquisa;
 
 	//monta o tf e depois o W:
 	tf_pesquisa();
 	w_pesquisa_construcao();
 
-	cosine_ranking_build();
+	cosine_ranking_build(); // monta o ranking cosseno
 
-	imprimir_resultado_pesquisa();//imprime o resultado da pesquisa
 }
 
 
@@ -143,4 +156,8 @@ void Busca::imprimir_resultado_pesquisa() {
 		}
 		cout << endl;
 	}
+}
+
+map<double, list<string>> Busca::cosine_ranking() {
+	return cosine_ranking_;
 }
