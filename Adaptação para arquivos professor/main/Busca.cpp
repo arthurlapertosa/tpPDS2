@@ -7,6 +7,9 @@ Busca::Busca()
 {
 	LeituraDosArquivos();
 	wvector_ = arquivos_.retornar_w_vector();
+	parte_de_cima_ = 0;
+	parte_de_baixo_esq_ = 0;
+	parte_de_baixo_dir_ = 0;
 }
 
 Busca::Busca(string pesquisa) : Busca() {
@@ -73,7 +76,7 @@ void Busca::w_pesquisa_construcao()
 {
 	vector<string> palavras = arquivos_.palavras_return(); //Pega todas as palavras que estão nos arquivos para montar o W da pesquisa
 	for (string palavra : palavras) { //for each nas palavras dos arquivos
-		w_pesquisa_.inserir_no_wmap(palavra, tf_retorna(palavra) * arquivos_.idf(palavra)); //Vai montando o W da pesquisa
+		w_pesquisa_.inserir_no_wmap(palavra, tf_retorna(palavra) * arquivos_.idf(palavra), "pesquisa"); //Vai montando o W da pesquisa
 	}
 	//w_pesquisa_.exibir();
 }
@@ -89,9 +92,10 @@ void Busca::cosine_ranking_build()
 	for (int i = 1; i <= arquivos_.numeroDocs(); i++) { //Itera entre os documentos
 
 		try { //tratamento exçecões divisão por zero
-			cima = parte_de_cima_sim(i); // parte de cima da divisao
-			baixo_dir = sqrt(parte_de_baixo_dir_sim()); // Parte de baixo direita da divisao
-			baixo_esq = sqrt(parte_de_baixo_esq_sim(i)); //Parte de baixo esquerda da divisao
+			parte_de_cima_sim(i);
+			cima = parte_de_cima_; // parte de cima da divisao
+			baixo_dir = sqrt(parte_de_baixo_dir_); // Parte de baixo direita da divisao
+			baixo_esq = sqrt(parte_de_baixo_esq_); //Parte de baixo esquerda da divisao
 			if (baixo_dir == 0 && baixo_esq == 0) throw 0;
 			if (baixo_dir == 0) throw 1;
 			if (baixo_esq == 0) throw 2;
@@ -108,44 +112,26 @@ void Busca::cosine_ranking_build()
 				sim = cima / baixo_dir;
 			}
 		}
-		documento = "d" + to_string(i) + ".txt";
+		//wvector_[i].nome_doc;
+		documento = wvector_[i].nome_doc();
 
 		ret = cosine_ranking_.insert({ sim, {documento} }); //Insere o elemento no dicionário, sendo o indice a similaridade do documento com a busca. Se a palavra já existir, retorna false para o iterator ret, e o índice não é criado
 		if (!ret.second) { //Se não existir o elemento já no mapa
 			cosine_ranking_[sim].push_back(documento); //vai adicionando os nomes dos documentos
 		}
+		cout << "montou o cosine ranking do arquivo " << i << endl;
 	}
 }
 
 
-double Busca::parte_de_cima_sim(int num_doc)
+void Busca::parte_de_cima_sim(int num_doc)
 {
-	double soma = 0; //soma da parte de cima
 	vector<string> palavras = arquivos_.palavras_return(); //Pega todas as palavras que estão nos arquivos para fazer as operações
 	for (string palavra : palavras) {
-		soma = soma + (wvector_[num_doc][palavra] * w_pesquisa_[palavra]);
+		parte_de_cima_ = parte_de_cima_ + (wvector_[num_doc][palavra] * w_pesquisa_[palavra]);
+		parte_de_baixo_dir_ = parte_de_baixo_dir_ + (w_pesquisa_[palavra] * w_pesquisa_[palavra]);
+		parte_de_baixo_esq_ = parte_de_baixo_esq_ + (wvector_[num_doc][palavra] * wvector_[num_doc][palavra]);
 	}
-	return soma;
-}
-
-double Busca::parte_de_baixo_dir_sim()
-{
-	double soma = 0; //soma da parte de baixo direita
-	vector<string> palavras = arquivos_.palavras_return(); //Pega todas as palavras que estão nos arquivos para fazer as operações
-	for (string palavra : palavras) {
-		soma = soma + (w_pesquisa_[palavra] * w_pesquisa_[palavra]);
-	}
-	return soma;
-}
-
-double Busca::parte_de_baixo_esq_sim(int num_doc)
-{
-	double soma = 0; //soma da parte de baixo esq
-	vector<string> palavras = arquivos_.palavras_return(); //Pega todas as palavras que estão nos arquivos para fazer as operações
-	for (string palavra : palavras) {
-		soma = soma + (wvector_[num_doc][palavra] * wvector_[num_doc][palavra]);
-	}
-	return soma;
 }
 
 void Busca::imprimir_resultado_pesquisa() {

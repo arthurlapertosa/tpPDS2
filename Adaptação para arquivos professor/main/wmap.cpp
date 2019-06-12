@@ -3,8 +3,9 @@
 void wmap() {
 }
 
-void wmap::inserir_no_wmap(string palavra, double valor) {
+void wmap::inserir_no_wmap(string palavra, double valor, string documento) {
 	wmap_.insert({ palavra, valor });
+	nome_doc_ = documento;
 }
 
 void wmap::exibir() {
@@ -19,6 +20,11 @@ void wmap::exibir() {
 double wmap::operator[](string palavra)
 {
 	return wmap_[palavra];
+}
+
+string wmap::nome_doc()
+{
+	return nome_doc_;
 }
 
 map<string, double> wmap::w_map()

@@ -38,6 +38,10 @@ private:
 	//Para retornar os atributos para os Testes
 	friend class Teste;
 
+	double parte_de_cima_;
+	double parte_de_baixo_esq_;
+	double parte_de_baixo_dir_;
+
 
 	/////////////////////////	METODOS:
 
@@ -60,13 +64,7 @@ private:
 	void cosine_ranking_build();
 
 	//Parte de cima da formula de similaridade
-	double parte_de_cima_sim(int num_doc);
-
-	//Parte de baixo-direita da formula de similaridade
-	double parte_de_baixo_dir_sim();
-
-	//Parte de baixo-esquerda da formula de similaridade
-	double parte_de_baixo_esq_sim(int num_doc);
+	void parte_de_cima_sim(int num_doc);
 
 public:
 	//Inicializa a classe busca vazia

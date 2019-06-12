@@ -4,6 +4,7 @@
 int main(){
 	bool loop = 1;
 	while(loop){
+		cout << "programa comecou" << endl;
 		Busca primeiro;
 		primeiro.pesquisa_usuario_digita();
 		cout << endl << "Para continuar digite 1. Para sair, digite 0" << endl;
