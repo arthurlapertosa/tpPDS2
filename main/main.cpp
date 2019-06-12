@@ -132,7 +132,7 @@ TEST_SUITE("Busca") {
 	}
 	TEST_CASE("LeituraArquivos: IDF Documentos") {
 		CHECK((Teste::arquivos(a).idf("voce") >= 0.07 && Teste::arquivos(a).idf("voce") <= 0.08));
-		CHECK(Teste::arquivos(a).idf("oi") >= 0.0);
+		CHECK(Teste::arquivos(a).idf("oi") == 0.0);
 		CHECK((Teste::arquivos(a).idf("casa") >= 0.17 && Teste::arquivos(a).idf("casa") <= 0.18));
 		CHECK((Teste::arquivos(a).idf("coisas") >= 0.30 && Teste::arquivos(a).idf("coisas") <= 0.31));
 		CHECK((Teste::arquivos(a).idf("pessoas") >= 0.47 && Teste::arquivos(a).idf("pessoas") <= 0.48));
