@@ -244,18 +244,18 @@ TEST_SUITE("Busca") {
 	}
 
 	TEST_CASE("Busca(string pesquisa): realizar várias pesquisas diferentes e conferir resultado do cosine ranking") {
-		Busca first("Oi");
-		CHECK(first.cosine_ranking().size() == 1);
-		CHECK(first_key(first.cosine_ranking()) == 0.0);
-		CHECK(compare_lists(first.cosine_ranking()[0.0], { "d1.txt", "d2.txt", "d3.txt", "d4.txt", "d5.txt", "d6.txt" }));
-		CHECK(compare_lists(first_list(first.cosine_ranking()), { "d1.txt", "d2.txt", "d3.txt", "d4.txt", "d5.txt", "d6.txt" }));
+		Busca FIRST("Oi");
+		CHECK(FIRST.cosine_ranking().size() == 1);
+		CHECK(first_key(FIRST.cosine_ranking()) == 0.0);
+		CHECK(compare_lists(FIRST.cosine_ranking()[0.0], { "d1.txt", "d2.txt", "d3.txt", "d4.txt", "d5.txt", "d6.txt" }));
+		CHECK(compare_lists(first_list(FIRST.cosine_ranking()), { "d1.txt", "d2.txt", "d3.txt", "d4.txt", "d5.txt", "d6.txt" }));
 
-		Busca second("guardachuva como");
-		CHECK(second.cosine_ranking().size() == 2);
-		CHECK(compare_lists(first_list(second.cosine_ranking()), { "d1.txt" })); //Testa se o documento mais proximo dessa pesquisa realmente eh o d1.txt
-		CHECK(compare_lists(second_list(second.cosine_ranking()), { "d2.txt", "d3.txt", "d4.txt", "d5.txt", "d6.txt" }));
-		CHECK(floor(first_key(second.cosine_ranking()) * 10000) / 10000 == 0.7853); //Testa se o cosine ranking entre a pesquisa "guarda-chuva como" e o documento "d1.txt" é igual a 0.7853
-		CHECK(floor(second_key(second.cosine_ranking()) * 10000) / 10000 == 0.0); //Testa se o cosine ranking entre a pesquisa "guarda-chuva como" e os documentos {"d2.txt", "d3.txt", "d4.txt", "d5.txt", "d6.txt"} é igual a 0.0
+		Busca SECOND("guardachuva como");
+		CHECK(SECOND.cosine_ranking().size() == 2);
+		CHECK(compare_lists(first_list(SECOND.cosine_ranking()), { "d1.txt" })); //Testa se o documento mais proximo dessa pesquisa realmente eh o d1.txt
+		CHECK(compare_lists(second_list(SECOND.cosine_ranking()), { "d2.txt", "d3.txt", "d4.txt", "d5.txt", "d6.txt" }));
+		CHECK(floor(first_key(SECOND.cosine_ranking()) * 10000) / 10000 == 0.7853); //Testa se o cosine ranking entre a pesquisa "guarda-chuva como" e o documento "d1.txt" é igual a 0.7853
+		CHECK(floor(second_key(SECOND.cosine_ranking()) * 10000) / 10000 == 0.0); //Testa se o cosine ranking entre a pesquisa "guarda-chuva como" e os documentos {"d2.txt", "d3.txt", "d4.txt", "d5.txt", "d6.txt"} é igual a 0.0
 
 	}
 }
