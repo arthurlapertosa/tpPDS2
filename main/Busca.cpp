@@ -157,7 +157,3 @@ void Busca::imprimir_resultado_pesquisa() {
 		cout << endl;
 	}
 }
-
-map<double, list<string>> Busca::cosine_ranking() {
-	return cosine_ranking_;
-}
