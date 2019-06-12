@@ -72,7 +72,6 @@ TEST_SUITE("Busca") {
 		CHECK((Teste::arquivos(a).idf("casa") >= 0.17 && Teste::arquivos(a).idf("casa") <= 0.18));
 		CHECK((Teste::arquivos(a).idf("coisas") >= 0.30 && Teste::arquivos(a).idf("coisas") <= 0.31));
 		CHECK((Teste::arquivos(a).idf("pessoas") >= 0.47 && Teste::arquivos(a).idf("pessoas") <= 0.48));
-		// ANDRE - FAZER PELO MENOS DAS PALAVRAS oi , casa , coisas , pessoas 
 	}
 	TEST_CASE("LeituraArquivos: frequencia_palavra: Numero documentos que a palavra aparece") {
 		CHECK(Teste::arquivos(a).numero_Doc_Palavra("oi") == 6);
