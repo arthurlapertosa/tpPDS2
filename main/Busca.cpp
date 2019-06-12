@@ -17,8 +17,8 @@ void Busca::pesquisa_usuario_digita()
 {
 	string pesquisa;
 	cout << "Digite sua busca" << endl;
+	std::cin.ignore(); // Ignora qualquer coisa digitada antes, que pode influenciar no getline I
 	getline(cin, pesquisa); //cin para pegar tudo, inclusive os espaços
-
 	pesquisa_usuario(pesquisa); //Realiza a pesquisa
 
 	imprimir_resultado_pesquisa();//imprime o resultado da pesquisa
@@ -156,4 +156,9 @@ void Busca::imprimir_resultado_pesquisa() {
 		}
 		cout << endl;
 	}
+}
+
+std::map<double, std::list<string>> Busca::cosine_ranking()
+{
+	return cosine_ranking_;
 }

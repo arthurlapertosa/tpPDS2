@@ -1,5 +1,5 @@
-#ifndef BUSCA
-#define BUSCA
+#ifndef BUSCA_H
+#define BUSCA_H
 #include "LeituraArquivos.h"
 #include "wmap.h"
 #include "frequencia_palavra.h"
@@ -15,6 +15,8 @@ class Busca
 {
 private:
 	
+	//////////////////////   ATRIBUTOS:
+
 	//A classe leitura arquivos, com todas as informações da leitura dos arquivos
 	LeituraArquivos arquivos_;
 
@@ -28,25 +30,20 @@ private:
 	frequencia_palavra tf_pesquisa_;
 	
 	//Map do cosine ranking
-	map<double, list<string>> cosine_ranking_;
+	std::map<double, list<string>> cosine_ranking_;
 
-	//wvector com do documento
+	//wvector do documento
 	wvector wvector_;
 
+	//Para retornar os atributos para os Testes
 	friend class Teste;
 
-public:
-	Busca();
-	
-	//Inicializa a classe busca e realiza a busca com o parametro passado
-	Busca(string pesquisa);
 
-	//Realiza todo o processo de pesquisar com o usuário digitando a pesquisa na tela
-	void pesquisa_usuario_digita();
+	/////////////////////////	METODOS:
 
 	//Realiza todo o processo da maquininha de busca
 	void pesquisa_usuario(string pesquisa);
-
+	
 	//Lê os arquivos na pasta
 	void LeituraDosArquivos();
 
@@ -71,10 +68,21 @@ public:
 	//Parte de baixo-esquerda da formula de similaridade
 	double parte_de_baixo_esq_sim(int num_doc);
 
+public:
+	//Inicializa a classe busca vazia
+	Busca();
+	
+	//Inicializa a classe busca e realiza a busca com o parametro passado
+	Busca(string pesquisa);
+
+	//Realiza todo o processo de pesquisar com o usuário digitando a pesquisa na tela
+	void pesquisa_usuario_digita();
+	
 	//Imprime o resultado da pesquisa
 	void imprimir_resultado_pesquisa();
+
+	//Retorna o dicionario do cosine ranking - para qualquer tipo de uso desejado
+	std::map<double, std::list<string>> cosine_ranking();
 };
 
-
-
-#endif //BUSCA
+#endif //BUSCA_H
