@@ -6,8 +6,10 @@ wmap::wmap() {
 
 void wmap::inserir_no_wmap(string palavra, double valor, string documento) {
 	wmap_.insert({ palavra, valor });
-	nome_doc_ = documento;
+	double soma = 0;
 	norma_vetor_ = norma_vetor_ + (valor * valor);
+	nome_doc_ = documento;
+
 }
 
 void wmap::exibir() {
@@ -24,11 +26,6 @@ double wmap::operator[](string palavra)
 	return wmap_[palavra];
 }
 
-string wmap::nome_doc()
-{
-	return nome_doc_;
-}
-
 map<string, double> wmap::w_map()
 {
 	return wmap_;
@@ -37,4 +34,9 @@ map<string, double> wmap::w_map()
 double wmap::norma_vetor()
 {
 	return norma_vetor_;
+}
+
+string wmap::nome_doc()
+{
+	return nome_doc_;
 }

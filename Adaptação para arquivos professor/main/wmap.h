@@ -12,12 +12,14 @@ class wmap {
 private:
 	map<string, double> wmap_;
 
-	string nome_doc_;
-
+	//Norma do vetor
 	double norma_vetor_;
-public:
-	wmap();
 
+	//Nome do documento
+	string nome_doc_;
+public:
+
+	wmap();
 	//Insere no map uma associação de palavras com o valor w dela
 	void inserir_no_wmap(string palavra, double valor, string documento);
 
@@ -26,12 +28,12 @@ public:
 
 	//Atribui ao operador [] em que o argumênto é a palavra, a função de retornar o w correspondente 
 	double operator[](string palavra);
-	
-	string nome_doc();
 
 	map<string, double> w_map();
 
 	double norma_vetor();
+
+	string nome_doc();
 };
 
 #endif WSET_H
