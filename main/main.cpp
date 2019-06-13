@@ -297,19 +297,19 @@ TEST_SUITE("Busca") {
 		CHECK(floor(fifth_key(Teste::cosine_ranking(FOURTH)) * 10000) / 10000 == 0.0154);
 		CHECK(floor(sixth_key(Teste::cosine_ranking(FOURTH)) * 10000) / 10000 == 0.0);
 
-		Busca FIFTH("Vejam so para onde os homens casa casa");
-		CHECK(Teste::cosine_ranking(FIFTH).size() == 6);
-		CHECK(compare_lists(first_list(Teste::cosine_ranking(FIFTH)), { "d3.txt" })); //Testa se o documento mais proximo dessa pesquisa realmente eh o d6.txt
-		CHECK(compare_lists(second_list(Teste::cosine_ranking(FIFTH)), { "d5.txt" }));
-		CHECK(compare_lists(third_list(Teste::cosine_ranking(FOURTH)), { "d1.txt" }));
-		CHECK(compare_lists(fourth_list(Teste::cosine_ranking(FOURTH)), { "d5.txt" }));
-		CHECK(compare_lists(fifth_list(Teste::cosine_ranking(FOURTH)), { "d2.txt" }));
-		CHECK(compare_lists(sixth_list(Teste::cosine_ranking(FOURTH)), { "d3.txt" }));
-		CHECK(floor(first_key(Teste::cosine_ranking(FIFTH)) * 10000) / 10000 == 0.654); //Testa se o cosine ranking entre a pesquisa e o documento "d6.txt" é igual a 1, ou seja, a pesquisa eh identica ao "d5,txt"
-		CHECK(floor(second_key(Teste::cosine_ranking(FOURTH)) * 10000) / 10000 == 0.156);
-		CHECK(floor(third_key(Teste::cosine_ranking(FOURTH)) * 10000) / 10000 == 0.0589);
-		CHECK(floor(fourth_key(Teste::cosine_ranking(FOURTH)) * 10000) / 10000 == 0.0237);
-		CHECK(floor(fifth_key(Teste::cosine_ranking(FOURTH)) * 10000) / 10000 == 0.0154);
-		CHECK(floor(sixth_key(Teste::cosine_ranking(FOURTH)) * 10000) / 10000 == 0.0);
+		//Busca FIFTH("Vejam so para onde os homens casa casa");
+		//CHECK(Teste::cosine_ranking(FIFTH).size() == 6);
+		//CHECK(compare_lists(first_list(Teste::cosine_ranking(FIFTH)), { "d3.txt" })); //Testa se o documento mais proximo dessa pesquisa realmente eh o d6.txt
+		//CHECK(compare_lists(second_list(Teste::cosine_ranking(FIFTH)), { "d5.txt" }));
+		//CHECK(compare_lists(third_list(Teste::cosine_ranking(FOURTH)), { "d1.txt" }));
+		//CHECK(compare_lists(fourth_list(Teste::cosine_ranking(FOURTH)), { "d5.txt" }));
+		//CHECK(compare_lists(fifth_list(Teste::cosine_ranking(FOURTH)), { "d2.txt" }));
+		//CHECK(compare_lists(sixth_list(Teste::cosine_ranking(FOURTH)), { "d3.txt" }));
+		//CHECK(floor(first_key(Teste::cosine_ranking(FIFTH)) * 10000) / 10000 == 0.654); //Testa se o cosine ranking entre a pesquisa e o documento "d6.txt" é igual a 1, ou seja, a pesquisa eh identica ao "d5,txt"
+		//CHECK(floor(second_key(Teste::cosine_ranking(FOURTH)) * 10000) / 10000 == 0.156);
+		//CHECK(floor(third_key(Teste::cosine_ranking(FOURTH)) * 10000) / 10000 == 0.0589);
+		//CHECK(floor(fourth_key(Teste::cosine_ranking(FOURTH)) * 10000) / 10000 == 0.0237);
+		//CHECK(floor(fifth_key(Teste::cosine_ranking(FOURTH)) * 10000) / 10000 == 0.0154);
+		//CHECK(floor(sixth_key(Teste::cosine_ranking(FOURTH)) * 10000) / 10000 == 0.0);
 	}
 }

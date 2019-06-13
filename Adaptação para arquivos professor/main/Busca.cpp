@@ -63,6 +63,7 @@ void Busca::tf_pesquisa()
 	while (divider >> palavra) //Dividindo a string em palavras
 	{
 		tf_pesquisa_.inserir(palavra, "pesquisa"); //vai inserindo no tf
+		palavras_na_pesquisa_.push_back(palavra);
 	}
 	//tf_pesquisa_.imprimir();
 }
@@ -95,7 +96,7 @@ void Busca::cosine_ranking_build()
 			parte_de_cima_sim(i);
 			cima = parte_de_cima_; // parte de cima da divisao
 			baixo_dir = sqrt(parte_de_baixo_dir_); // Parte de baixo direita da divisao
-			baixo_esq = sqrt(parte_de_baixo_esq_); //Parte de baixo esquerda da divisao
+			baixo_esq = sqrt(arquivos_.retornar_w_vector()[i].norma_vetor()); //Parte de baixo esquerda da divisao
 			if (baixo_dir == 0 && baixo_esq == 0) throw 0;
 			if (baixo_dir == 0) throw 1;
 			if (baixo_esq == 0) throw 2;
@@ -127,10 +128,11 @@ void Busca::cosine_ranking_build()
 void Busca::parte_de_cima_sim(int num_doc)
 {
 	vector<string> palavras = arquivos_.palavras_return(); //Pega todas as palavras que estão nos arquivos para fazer as operações
-	for (string palavra : palavras) {
+	vector<string> palavras_doc = palavras_na_pesquisa_;
+	for (string palavra : palavras_doc) {
 		parte_de_cima_ = parte_de_cima_ + (wvector_[num_doc][palavra] * w_pesquisa_[palavra]);
 		parte_de_baixo_dir_ = parte_de_baixo_dir_ + (w_pesquisa_[palavra] * w_pesquisa_[palavra]);
-		parte_de_baixo_esq_ = parte_de_baixo_esq_ + (wvector_[num_doc][palavra] * wvector_[num_doc][palavra]);
+		//parte_de_baixo_esq_ = parte_de_baixo_esq_ + (wvector_[num_doc][palavra] * wvector_[num_doc][palavra]);
 	}
 }
 

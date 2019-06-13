@@ -38,6 +38,8 @@ private:
 	//Para retornar os atributos para os Testes
 	friend class Teste;
 
+	std::vector<string> palavras_na_pesquisa_;
+
 	double parte_de_cima_;
 	double parte_de_baixo_esq_;
 	double parte_de_baixo_dir_;

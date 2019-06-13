@@ -13,7 +13,11 @@ private:
 	map<string, double> wmap_;
 
 	string nome_doc_;
+
+	double norma_vetor_;
 public:
+	wmap();
+
 	//Insere no map uma associação de palavras com o valor w dela
 	void inserir_no_wmap(string palavra, double valor, string documento);
 
@@ -26,6 +30,8 @@ public:
 	string nome_doc();
 
 	map<string, double> w_map();
+
+	double norma_vetor();
 };
 
 #endif WSET_H
