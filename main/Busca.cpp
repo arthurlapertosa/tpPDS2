@@ -86,13 +86,13 @@ void Busca::cosine_ranking_build()
 	string documento;
 	//Elemento ja pode estar no mapa, pois se existirem 2 documentos com o mesmo peso, um dos 2 documentos não será adicionado ao mapa
 	pair<map<double, list<string>>::iterator, bool> ret; //Cria a variável tipo bool que testa se o elemento já está no mapa
-
+	baixo_dir = sqrt(w_pesquisa_.norma_vetor()); // Parte de baixo direita da divisao
 	for (int i = 1; i <= arquivos_.numeroDocs(); i++) { //Itera entre os documentos
 
 		try { //tratamento exçecões divisão por zero
 			cima = parte_de_cima_sim(i); // parte de cima da divisao
-			baixo_dir = sqrt(parte_de_baixo_dir_sim()); // Parte de baixo direita da divisao
-			baixo_esq = sqrt(arquivos_.retornar_w_vector()[i].norma_vetor()); //Parte de baixo esquerda da divisao
+
+			baixo_esq = sqrt(wvector_[i].norma_vetor()); //Parte de baixo esquerda da divisao
 			//double valor_novo = wvector_[i].norma_vetor();
 			//baixo_esq_nova = sqrt(arquivos_.retornar_w_vector()[i].norma_vetor()); //Parte de baixo esquerda da divisao
 			if (baixo_dir == 0 && baixo_esq == 0) throw 0;

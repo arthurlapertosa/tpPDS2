@@ -11,7 +11,7 @@ LeituraArquivos::LeituraArquivos() {
 void LeituraArquivos::ler() {
 	//Cria o documento
 	ifstream words;
-	for (int i = 53000; i <= 54000; i++) {
+	for (int i = 67000; i <= 69000; i++) {
 		words.open(to_string(i)); //vai lendo cada um dos documentos : d1.txt, d2.txt, ... , dn.txt
 		//if (i == 1) {
 			//	if (!words.is_open()) {
@@ -32,9 +32,9 @@ void LeituraArquivos::ler() {
 					frequencia_clone_.inserir(a, "d" + to_string(i) + ".txt");
 					palavras_.insert(palavras_.end(), a);
 				}
+				cout << "Leitura pronta do arquivo: " << i << endl;
 			}
 			words.close();
-			cout << "Leitura pronta do arquivo: " << i << endl;
 		}
 	frequencia_invertida_.inserir(frequencia_.frequenciaPalavra(), numero_doc_);
 	palavras_ = wvector_.vetorNaoRep(palavras_); // Elimina palavras repetidas no vetor
@@ -104,7 +104,7 @@ int LeituraArquivos::numero_Doc_Palavra(string palavra)
 
 void LeituraArquivos::lerclone(vector<string> palavras) {
 	ifstream words;
-	for (int i = 53000; i <= 54000; i++) {
+	for (int i = 67000; i <= 69000; i++) {
 		words.open(to_string(i)); //vai lendo cada um dos documentos : d1.txt, d2.txt, ... , dn.txt
 		//if (i == 1) {
 		//	if (!words.is_open()) {
@@ -121,9 +121,9 @@ void LeituraArquivos::lerclone(vector<string> palavras) {
 				aux.inserir_no_wmap(*i1, tf("d" + to_string(i) + ".txt", *i1) * idf(*i1), to_string(i)); 
 			}
 			wvector_.inserir_vetor(aux); // Incrementa o wvector oficial com o wmap auxiliar (um para cada doc)
+			cout << "Leitura clone pronta do arquivo: " << i << endl;
 		}
 		words.close();
-		cout << "Leitura clone pronta do arquivo: " << i << endl;
 	}
 	system("cls");
 }
