@@ -40,3 +40,8 @@ string wmap::nome_doc()
 {
 	return nome_doc_;
 }
+
+void wmap::clear()
+{
+	wmap_.clear();
+}

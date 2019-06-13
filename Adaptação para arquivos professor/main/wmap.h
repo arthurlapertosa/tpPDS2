@@ -34,6 +34,8 @@ public:
 	double norma_vetor();
 
 	string nome_doc();
+
+	void clear();
 };
 
 #endif WSET_H

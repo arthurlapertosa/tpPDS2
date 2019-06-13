@@ -53,6 +53,11 @@ int frequencia_palavra::frequenciaPalavraNoDocumento(string documento, string pa
 	return frequencia_palavra_[palavra][documento];
 }
 
+void frequencia_palavra::clear()
+{
+	frequencia_palavra_.clear();
+}
+
 frequencia_palavra::~frequencia_palavra()
 {
 }
