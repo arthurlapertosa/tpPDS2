@@ -62,6 +62,7 @@ void Busca::tf_pesquisa()
 		tf_pesquisa_.inserir(palavra, "pesquisa"); //vai inserindo no tf
 		palavras_na_pesquisa_.push_back(palavra);
 	}
+	palavras_na_pesquisa_ = wvector_.vetorNaoRep(palavras_na_pesquisa_); //Desrepete as palavras da pesquisa
 	//tf_pesquisa_.imprimir();
 }
 
@@ -93,8 +94,7 @@ void Busca::cosine_ranking_build()
 			cima = parte_de_cima_sim(i); // parte de cima da divisao
 
 			baixo_esq = sqrt(wvector_[i].norma_vetor()); //Parte de baixo esquerda da divisao
-			//double valor_novo = wvector_[i].norma_vetor();
-			//baixo_esq_nova = sqrt(arquivos_.retornar_w_vector()[i].norma_vetor()); //Parte de baixo esquerda da divisao
+
 			if (baixo_dir == 0 && baixo_esq == 0) throw 0;
 			if (baixo_dir == 0) throw 1;
 			if (baixo_esq == 0) throw 2;
@@ -125,34 +125,8 @@ double Busca::parte_de_cima_sim(int num_doc)
 {
 	double soma = 0; //soma da parte de cima
 
-	vector<string> palavras = arquivos_.palavras_return(); //Pega todas as palavras que estão nos arquivos para fazer as operações
-	vector<string> palavras_doc = palavras_na_pesquisa_;
-	palavras_doc = arquivos_.retornar_w_vector().vetorNaoRep(palavras_doc);
-	for (string palavra : palavras_doc) {
-		soma = soma + (wvector_[num_doc][palavra] * w_pesquisa_[palavra]);
-	}
-	return soma;
-}
-
-double Busca::parte_de_baixo_dir_sim()
-{
-	double soma = 0; //soma da parte de baixo direita
-	vector<string> palavras = arquivos_.palavras_return(); //Pega todas as palavras que estão nos arquivos para fazer as operações
-	vector<string> palavras_doc = palavras_na_pesquisa_;
-	palavras_doc = arquivos_.retornar_w_vector().vetorNaoRep(palavras_doc);
-	for (string palavra : palavras_doc) {
-		soma = soma + (w_pesquisa_[palavra] * w_pesquisa_[palavra]);
-	}
-	return soma;
-}
-
-double Busca::parte_de_baixo_esq_sim(int num_doc)
-{
-	double soma = 0; //soma da parte de baixo esq
-	vector<string> palavras = arquivos_.palavras_return(); //Pega todas as palavras que estão nos arquivos para fazer as operações
-	vector<string> palavras_doc = palavras_na_pesquisa_;
-	for (string palavra : palavras) {
-		soma = soma + (wvector_[num_doc][palavra] * wvector_[num_doc][palavra]);
+	for (string palavra : palavras_na_pesquisa_) {
+		soma = soma + (wvector_[num_doc][palavra] * w_pesquisa_[palavra]); 	 //Pega todas as palavras que estão nos arquivos para fazer as operações
 	}
 	return soma;
 }

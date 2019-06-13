@@ -11,8 +11,8 @@ LeituraArquivos::LeituraArquivos() {
 void LeituraArquivos::ler() {
 	//Cria o documento
 	ifstream words;
-	for (int i = 67000; i <= 69000; i++) {
-		words.open(to_string(i)); //vai lendo cada um dos documentos : d1.txt, d2.txt, ... , dn.txt
+	for (int i = 67000; i <= 78000; i++) {
+		words.open("txts//" + to_string(i)); //vai lendo cada um dos documentos : d1.txt, d2.txt, ... , dn.txt
 		//if (i == 1) {
 			//	if (!words.is_open()) {
 			//		cout << "Falha na leitura de arquivos" << endl;
@@ -104,8 +104,8 @@ int LeituraArquivos::numero_Doc_Palavra(string palavra)
 
 void LeituraArquivos::lerclone(vector<string> palavras) {
 	ifstream words;
-	for (int i = 67000; i <= 69000; i++) {
-		words.open(to_string(i)); //vai lendo cada um dos documentos : d1.txt, d2.txt, ... , dn.txt
+	for (int i = 67000; i <= 78000; i++) {
+		words.open("txts//" + to_string(i)); //vai lendo cada um dos documentos : d1.txt, d2.txt, ... , dn.txt
 		//if (i == 1) {
 		//	if (!words.is_open()) {
 		//		cout << "Falha na leitura de arquivos" << endl;

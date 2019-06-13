@@ -60,7 +60,7 @@ void Busca::tf_pesquisa()
 	while (divider >> palavra) //Dividindo a string em palavras
 	{
 		tf_pesquisa_.inserir(palavra, "pesquisa"); //vai inserindo no tf
-		palavras_na_pesquisa_.push_back(palavra);
+		palavras_na_pesquisa_.insert(palavra);
 	}
 	//tf_pesquisa_.imprimir();
 }

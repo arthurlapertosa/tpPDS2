@@ -38,7 +38,7 @@ private:
 	//Para retornar os atributos para os Testes
 	friend class Teste;
 
-	std::vector<string> palavras_na_pesquisa_;
+	std::set<string> palavras_na_pesquisa_;
 
 
 	/////////////////////////	METODOS:
