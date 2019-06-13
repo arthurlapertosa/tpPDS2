@@ -60,7 +60,9 @@ void Busca::tf_pesquisa()
 	while (divider >> palavra) //Dividindo a string em palavras
 	{
 		tf_pesquisa_.inserir(palavra, "pesquisa"); //vai inserindo no tf
+		palavras_na_pesquisa_.push_back(palavra);
 	}
+	palavras_na_pesquisa_ = wvector_.vetorNaoRep(palavras_na_pesquisa_); //Desrepete as palavras da pesquisa
 	//tf_pesquisa_.imprimir();
 }
 
@@ -85,13 +87,14 @@ void Busca::cosine_ranking_build()
 	string documento;
 	//Elemento ja pode estar no mapa, pois se existirem 2 documentos com o mesmo peso, um dos 2 documentos não será adicionado ao mapa
 	pair<map<double, list<string>>::iterator, bool> ret; //Cria a variável tipo bool que testa se o elemento já está no mapa
-
+	baixo_dir = sqrt(w_pesquisa_.norma_vetor()); // Parte de baixo direita da divisao
 	for (int i = 1; i <= arquivos_.numeroDocs(); i++) { //Itera entre os documentos
 
 		try { //tratamento exçecões divisão por zero
 			cima = parte_de_cima_sim(i); // parte de cima da divisao
-			baixo_dir = sqrt(parte_de_baixo_dir_sim()); // Parte de baixo direita da divisao
-			baixo_esq = sqrt(parte_de_baixo_esq_sim(i)); //Parte de baixo esquerda da divisao
+
+			baixo_esq = sqrt(wvector_[i].norma_vetor()); //Parte de baixo esquerda da divisao
+
 			if (baixo_dir == 0 && baixo_esq == 0) throw 0;
 			if (baixo_dir == 0) throw 1;
 			if (baixo_esq == 0) throw 2;
@@ -121,29 +124,9 @@ void Busca::cosine_ranking_build()
 double Busca::parte_de_cima_sim(int num_doc)
 {
 	double soma = 0; //soma da parte de cima
-	vector<string> palavras = arquivos_.palavras_return(); //Pega todas as palavras que estão nos arquivos para fazer as operações
-	for (string palavra : palavras) {
-		soma = soma + (wvector_[num_doc][palavra] * w_pesquisa_[palavra]);
-	}
-	return soma;
-}
 
-double Busca::parte_de_baixo_dir_sim()
-{
-	double soma = 0; //soma da parte de baixo direita
-	vector<string> palavras = arquivos_.palavras_return(); //Pega todas as palavras que estão nos arquivos para fazer as operações
-	for (string palavra : palavras) {
-		soma = soma + (w_pesquisa_[palavra] * w_pesquisa_[palavra]);
-	}
-	return soma;
-}
-
-double Busca::parte_de_baixo_esq_sim(int num_doc)
-{
-	double soma = 0; //soma da parte de baixo esq
-	vector<string> palavras = arquivos_.palavras_return(); //Pega todas as palavras que estão nos arquivos para fazer as operações
-	for (string palavra : palavras) {
-		soma = soma + (wvector_[num_doc][palavra] * wvector_[num_doc][palavra]);
+	for (string palavra : palavras_na_pesquisa_) {
+		soma = soma + (wvector_[num_doc][palavra] * w_pesquisa_[palavra]); 	 //Pega todas as palavras que estão nos arquivos para fazer as operações
 	}
 	return soma;
 }

@@ -10,7 +10,4 @@ int main(){
 		cin >> loop;
 		system("cls");
 	}
-	//cout << "digite sua busca: " << endl;
-	//Busca o("Vejam so para onde os homens casa");
-	//o.imprimir_resultado_pesquisa();
 } 

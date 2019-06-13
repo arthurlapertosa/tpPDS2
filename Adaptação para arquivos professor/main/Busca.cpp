@@ -56,10 +56,12 @@ void Busca::tf_pesquisa()
 {
 	istringstream divider(pesquisa_);
 	string palavra;
-
+	tf_pesquisa_.clear();
+	palavras_na_pesquisa_.clear();
 	while (divider >> palavra) //Dividindo a string em palavras
 	{
 		tf_pesquisa_.inserir(palavra, "pesquisa"); //vai inserindo no tf
+		palavras_na_pesquisa_.insert(palavra);
 	}
 	//tf_pesquisa_.imprimir();
 }
@@ -72,8 +74,9 @@ int Busca::tf_retorna(string palavra)
 void Busca::w_pesquisa_construcao()
 {
 	vector<string> palavras = arquivos_.palavras_return(); //Pega todas as palavras que estão nos arquivos para montar o W da pesquisa
+	w_pesquisa_.clear();
 	for (string palavra : palavras) { //for each nas palavras dos arquivos
-		w_pesquisa_.inserir_no_wmap(palavra, tf_retorna(palavra) * arquivos_.idf(palavra)); //Vai montando o W da pesquisa
+		w_pesquisa_.inserir_no_wmap(palavra, tf_retorna(palavra) * arquivos_.idf(palavra), "pesquisa"); //Vai montando o W da pesquisa
 	}
 	//w_pesquisa_.exibir();
 }
@@ -81,17 +84,19 @@ void Busca::w_pesquisa_construcao()
 void Busca::cosine_ranking_build()
 {
 	double sim;
-	double cima, baixo_dir, baixo_esq; //variáveis para receber os valores para fazer a divisão da formula do rank cosseno
+	double cima, baixo_dir, baixo_esq, cima_clone; //variáveis para receber os valores para fazer a divisão da formula do rank cosseno
 	string documento;
 	//Elemento ja pode estar no mapa, pois se existirem 2 documentos com o mesmo peso, um dos 2 documentos não será adicionado ao mapa
 	pair<map<double, list<string>>::iterator, bool> ret; //Cria a variável tipo bool que testa se o elemento já está no mapa
 
+	baixo_dir = std::sqrt(w_pesquisa_.norma_vetor()); // Parte de baixo direita da divisao
+	cosine_ranking_.clear();
 	for (int i = 1; i <= arquivos_.numeroDocs(); i++) { //Itera entre os documentos
 
 		try { //tratamento exçecões divisão por zero
 			cima = parte_de_cima_sim(i); // parte de cima da divisao
-			baixo_dir = sqrt(parte_de_baixo_dir_sim()); // Parte de baixo direita da divisao
-			baixo_esq = sqrt(parte_de_baixo_esq_sim(i)); //Parte de baixo esquerda da divisao
+			baixo_esq = std::sqrt(wvector_[i].norma_vetor()); //Parte de baixo esquerda da divisao
+
 			if (baixo_dir == 0 && baixo_esq == 0) throw 0;
 			if (baixo_dir == 0) throw 1;
 			if (baixo_esq == 0) throw 2;
@@ -108,45 +113,31 @@ void Busca::cosine_ranking_build()
 				sim = cima / baixo_dir;
 			}
 		}
-		documento = "d" + to_string(i) + ".txt";
+		documento = wvector_[i].nome_doc();
 
 		ret = cosine_ranking_.insert({ sim, {documento} }); //Insere o elemento no dicionário, sendo o indice a similaridade do documento com a busca. Se a palavra já existir, retorna false para o iterator ret, e o índice não é criado
 		if (!ret.second) { //Se não existir o elemento já no mapa
 			cosine_ranking_[sim].push_back(documento); //vai adicionando os nomes dos documentos
 		}
+		cout << "Cosine ranking pronto do documento: " << i << endl;
 	}
+	system("cls");
 }
 
 
 double Busca::parte_de_cima_sim(int num_doc)
 {
 	double soma = 0; //soma da parte de cima
-	vector<string> palavras = arquivos_.palavras_return(); //Pega todas as palavras que estão nos arquivos para fazer as operações
-	for (string palavra : palavras) {
+
+	//vector<string> palavras = arquivos_.palavras_return(); //Pega todas as palavras que estão nos arquivos para fazer as operações
+	//vector<string> palavras_doc = palavras_na_pesquisa_;
+	//palavras_doc = arquivos_.retornar_w_vector().vetorNaoRep(palavras_doc);
+	for (string palavra : palavras_na_pesquisa_) {
 		soma = soma + (wvector_[num_doc][palavra] * w_pesquisa_[palavra]);
 	}
 	return soma;
 }
 
-double Busca::parte_de_baixo_dir_sim()
-{
-	double soma = 0; //soma da parte de baixo direita
-	vector<string> palavras = arquivos_.palavras_return(); //Pega todas as palavras que estão nos arquivos para fazer as operações
-	for (string palavra : palavras) {
-		soma = soma + (w_pesquisa_[palavra] * w_pesquisa_[palavra]);
-	}
-	return soma;
-}
-
-double Busca::parte_de_baixo_esq_sim(int num_doc)
-{
-	double soma = 0; //soma da parte de baixo esq
-	vector<string> palavras = arquivos_.palavras_return(); //Pega todas as palavras que estão nos arquivos para fazer as operações
-	for (string palavra : palavras) {
-		soma = soma + (wvector_[num_doc][palavra] * wvector_[num_doc][palavra]);
-	}
-	return soma;
-}
 
 void Busca::imprimir_resultado_pesquisa() {
 	int rank = 1;
@@ -159,6 +150,7 @@ void Busca::imprimir_resultado_pesquisa() {
 		}
 		cout << endl;
 	}
+	cout << endl << "Numero de documentos totais: " << arquivos_.numeroDocs() << endl << "Numero de palavras totais: " << arquivos_.palavras_return().size() << endl;
 }
 
 std::map<double, std::list<string>> Busca::cosine_ranking()

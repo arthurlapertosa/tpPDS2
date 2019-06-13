@@ -11,9 +11,17 @@ using std::string;
 class wmap {
 private:
 	map<string, double> wmap_;
+
+	//Norma do vetor
+	double norma_vetor_;
+
+	//Nome do documento
+	string nome_doc_;
 public:
+
+	wmap();
 	//Insere no map uma associação de palavras com o valor w dela
-	void inserir_no_wmap(string palavra, double valor);
+	void inserir_no_wmap(string palavra, double valor, string documento);
 
 	//Exibe todos os valores do MAP
 	void exibir();
@@ -22,6 +30,12 @@ public:
 	double operator[](string palavra);
 
 	map<string, double> w_map();
+
+	double norma_vetor();
+
+	string nome_doc();
+
+	void clear();
 };
 
 #endif WSET_H

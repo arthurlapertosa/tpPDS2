@@ -38,6 +38,8 @@ private:
 	//Para retornar os atributos para os Testes
 	friend class Teste;
 
+	std::set<string> palavras_na_pesquisa_;
+
 
 	/////////////////////////	METODOS:
 
@@ -61,12 +63,6 @@ private:
 
 	//Parte de cima da formula de similaridade
 	double parte_de_cima_sim(int num_doc);
-
-	//Parte de baixo-direita da formula de similaridade
-	double parte_de_baixo_dir_sim();
-
-	//Parte de baixo-esquerda da formula de similaridade
-	double parte_de_baixo_esq_sim(int num_doc);
 
 public:
 	//Inicializa a classe busca vazia

@@ -34,6 +34,9 @@ public:
 	//Numero de vezes que a palavra apareceu no documento
 	int frequenciaPalavraNoDocumento(string documento, string palavra);
 
+	//limpa o tf
+	void clear();
+
 	~frequencia_palavra();
 };
 
