@@ -10,12 +10,13 @@ using std::string;
 
 class wmap {
 private:
+	//O WMap
 	map<string, double> wmap_;
 
-	//Norma do vetor
+	//Norma do vetor ao quadrado
 	double norma_vetor_;
 
-	//Nome do documento
+	//Nome do documento (somente desta versão do programa, pois precisa guardar os nomes (Já que os arquivos não são sequenciais)
 	string nome_doc_;
 public:
 
@@ -29,10 +30,13 @@ public:
 	//Atribui ao operador [] em que o argumênto é a palavra, a função de retornar o w correspondente 
 	double operator[](string palavra);
 
+	//Retorna o W map do documentos
 	map<string, double> w_map();
 
+	//Retorna a norma ao quadrado do vetor
 	double norma_vetor();
 
+	//Foi adicionado ess
 	string nome_doc();
 
 	void clear();

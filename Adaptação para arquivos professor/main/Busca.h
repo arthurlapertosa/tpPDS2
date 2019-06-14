@@ -38,6 +38,7 @@ private:
 	//Para retornar os atributos para os Testes
 	friend class Teste;
 
+	//Contém todas as palavras na pesquisa
 	std::set<string> palavras_na_pesquisa_;
 
 

@@ -10,8 +10,10 @@ using std::string;
 
 class wmap {
 private:
+	//O WMap
 	map<string, double> wmap_;
 
+	//Armazena a norma ao quadrado do vetor
 	double norma_vetor_;
 public:
 
@@ -25,8 +27,10 @@ public:
 	//Atribui ao operador [] em que o argumênto é a palavra, a função de retornar o w correspondente 
 	double operator[](string palavra);
 
+	//Retorna o W map do documentos
 	map<string, double> w_map();
 
+	//Retorna a norma ao quadrado do vetor
 	double norma_vetor();
 };
 

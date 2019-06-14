@@ -38,6 +38,7 @@ private:
 	//Para retornar os atributos para os Testes
 	friend class Teste;
 
+	//Vector com todas as palavras dos documentos
 	std::vector<string> palavras_na_pesquisa_;
 
 
