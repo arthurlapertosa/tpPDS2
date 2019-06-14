@@ -6,7 +6,7 @@ O projeto foi todo feito usando o Visual Studio. Para abrir o projeto, basta cli
 Ao abrir o projeto, abra o gerenciador de soluções do Visual Studio. Lá estarão todos os arquivos usados para fazer o programa de busca.
 Os arquivos podem ser abertos também abrindo a pasta "main". Todos estão contidos lá, inclusive os arquivos de texto que serão lidos.
 
-Na pasta principal, está o projeto que estávamos desenvolvendo inicialmente. Ele lê arquivos do tipo "d1.txt", "d2.txt", "dn.txt", com n >= 1. Nessa implementação, todos os arquivos tem que estar sequenciais, ou seja, se na pasta tiverem os arquivos: "d1.txt", "d2.txt" e "d4.txt", o programa só vai ler até o arquivo "d2.txt", tudo automático. O programa principal irá ler os arquivos deste tipo, sequencialmente, até não houver mais arquivos.
+Na pasta principal, está o projeto que estávamos desenvolvendo inicialmente. Ele lê arquivos do tipo "d1.txt", "d2.txt", "dn.txt", com n >= 1. Nessa implementação, todos os arquivos tem que estar sequenciais, ou seja, se na pasta tiverem os arquivos: "d1.txt", "d2.txt" e "d4.txt", o programa só vai ler até o arquivo "d2.txt", tudo automático. O programa principal irá ler os arquivos nomeados dessa forma, sequencialmente, até não houver mais arquivos.
 
 Os testes unitários estão contidos no arquivo "teste.cpp".
 
